@@ -1,0 +1,22 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-kawer-dev-04102-authRole",
+            "UnauthRoleArn": "arn:aws:iam::225459891775:role/amplify-kawer-dev-04102-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::225459891775:role/amplify-kawer-dev-04102-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-kawer-dev-04102-deployment",
+            "UnauthRoleName": "amplify-kawer-dev-04102-unauthRole",
+            "StackName": "amplify-kawer-dev-04102",
+            "StackId": "arn:aws:cloudformation:us-east-1:225459891775:stack/amplify-kawer-dev-04102/8ee6cd10-8d97-11ea-b538-0a200f00c284",
+            "AmplifyAppId": "d36nsogr9kd4zo"
+        },
+        "categories": {
+            "auth": {
+                "kawer3f3ff608": {
+                    "hostedUIProviderCreds": "[]"
+                }
+            }
+        }
+    }
+}
