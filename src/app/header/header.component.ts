@@ -1,19 +1,11 @@
-import {Component, HostListener, Inject, OnInit} from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import {Component, Inject, OnInit} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
+import {Auth} from 'aws-amplify';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  animations: [
-    trigger('fade',
-      [
-        state('void', style({opacity: 0})),
-        transition(':enter', [animate(300)]),
-        transition(':leave', [animate(500)]),
-      ]
-    )]
 })
 export class HeaderComponent implements OnInit {
 
@@ -24,15 +16,17 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  @HostListener('window:scroll', ['$event'])
-  onWindowScroll(e) {
-    if (window.pageYOffset > 550) {
-      const element = document.getElementById('navbar');
-      element.classList.add('sticky');
-    } else {
-      const element = document.getElementById('navbar');
-      element.classList.remove('sticky');
-    }
+
+  onLogin() {
+    // tslint:disable-next-line:max-line-length
+    const URL = 'https://kawer.auth.us-east-1.amazoncognito.com/login?client_id=1fqjct9m5273fiifrdi5eijeq9&response_type=code&scope=email+profile+openid&redirect_uri=http://localhost:4200/';
+    window.location.assign(URL);
+  }
+
+  async onLogout() {
+
+    const currentUser = Auth.userPool.getCurrentUser()
+    await currentUser.signOut()
   }
 
 
