@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+@font-face {
+  font-family: Roboto;
+  src: url(assets/fonts/Roboto-Medium.ttf) format("opentype");
+}
+
+@font-face {
+  font-family: Poppins;
+  src: url(assets/fonts/Poppins.ttf) format("opentype");
+}
+
+.title {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 42px;
+  color: #1F1A38;
+}
+.subtitle {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 26px;
+  color: #1F1A38;
+}
+.light-gray-text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  color: #828282;
+}
+body {
+  background-color: #E5E5E5;
+}
+

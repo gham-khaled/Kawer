@@ -1,0 +1,158 @@
+/* ######################################### BACKGROUND ###################################################### */
+
+#rent {
+  color: white;
+  width: 100%;
+  height: 65vh;
+  border-radius: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.d-flex.justify-content-center {
+  position: relative;
+  top: 15%;
+  right: -1%;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 80px;
+  line-height: 120px;
+}
+.wrapper {
+  position: relative;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  max-width: 860px;
+  width: 100%;
+  padding: 30px 60px;
+
+}
+/* ######################################### INPUT ###################################################### */
+
+.input {
+  padding: 15px 10px 15px 15px;
+  border: none;
+  position: relative;
+  width: 100%;
+  border-right: 1px solid #ccc;
+  font-size: 18px;
+  line-height: 21px;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.15);
+  text-indent: 10px;
+  background-position: 90% 50%;
+  background-repeat: no-repeat;
+  background-size: auto;
+
+}
+
+.input::placeholder {
+  color: #828282;
+}
+
+#location {
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  background-image: url("../../assets/images/icons/Pin.jpg");
+}
+
+#date {
+  background-image: url("../../assets/images/icons/calendar 1.png");
+
+}
+
+#staduim {
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  color: white;
+  background-image: url("../../assets/images/icons/search.png");
+  background-color: #F4CE11;
+}
+
+#staduim::placeholder {
+  color: white;
+}
+
+/* To remove border for the input on focus*/
+textarea:focus,
+input[type="text"]:focus,
+.uneditable-input:focus {
+  border-color: #ccc;
+  outline: 0 none;
+}
+
+
+/* ######################################### CARD ###################################################### */
+
+.card {
+  background: #FFFFFF;
+  box-shadow: 0px 2px 18px rgba(0, 0, 0, 0.2);
+  border-radius: 18px;
+  width: 95%;
+  border: none;
+}
+
+.card-title {
+  font-size: 19px;
+}
+.card-text.light-gray-text {
+  font-size: 16px;
+  line-height: 19px;
+}
+/* ######################################### NewsLetter ###################################################### */
+
+#newsletter {
+  background: #E0E0E0;
+  padding: 7% 5%;
+
+}
+#newsletter  input {
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+#newsletter button {
+  background: #F4CE11;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  color: #FFFFFF;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.15);
+  padding: 0px  30px;
+}
+/* ######################################### RESPONSIVE ###################################################### */
+
+@media all and (max-width: 769px) {
+  .row {
+    margin: 2px;
+  }
+
+  .d-flex.justify-content-center {
+    font-size: 50px;
+    line-height: 60px;
+    top: 20%;
+  }
+
+  .wrapper {
+    top: 84%;
+    padding: 10px 10px;
+  }
+
+  .input {
+    text-indent: 0;
+    font-size: 14px;
+    padding: 15px 5px 15px 7px;
+    background-size: 15%;
+
+  }
+  #newsletter  .justify-content-center {
+    display: flex;
+    padding: 10% 0;
+  }
+
+}
+
+
+
