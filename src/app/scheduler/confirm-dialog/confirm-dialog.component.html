@@ -1,0 +1,37 @@
+<div mat-dialog-content>
+  <div class="container">
+    <div class="row">
+      <div class="col-10 offset-1 pt-4">
+        <div class=" d-flex justify-content-center pt-2 pb-2 date-wrapper">
+          <img src="assets/images/icons/calendar%201.png" alt="" class="mr-2">
+          <div class="title">{{data.date.toDateString()}}</div>
+        </div>
+      </div>
+      <div class="col-6 pt-5 subtitle">
+        Proce per bookind
+      </div>
+      <div class="col-2 pt-5 price offset-4">
+        ${{data.price}}
+      </div>
+      <div class="col-6 pt-3 subtitle">
+        Service fee
+      </div>
+      <div class="col-2 pt-3 price offset-4">
+        $10
+      </div>
+      <div class="col-12 mt-4 mb-4">
+        <hr>
+      </div>
+      <div class="col-3 total">
+        Total
+      </div>
+      <div class="col-2 offset-7 total">
+        $84
+      </div>
+      <div class="col-12 mt-5">
+        <button [mat-dialog-close]="true" class="btn border-0"> Book</button>
+      </div>
+    </div>
+  </div>
+
+</div>

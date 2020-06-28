@@ -11,6 +11,7 @@
   src: url(assets/fonts/Poppins.ttf) format("opentype");
 }
 
+
 .title {
   font-family: Roboto;
   font-style: normal;
@@ -19,6 +20,7 @@
   line-height: 42px;
   color: #1F1A38;
 }
+
 .subtitle {
   font-family: Roboto;
   font-style: normal;
@@ -27,13 +29,35 @@
   line-height: 26px;
   color: #1F1A38;
 }
+
 .light-gray-text {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   color: #828282;
 }
+
 body {
   background-color: #E5E5E5;
 }
 
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+/* This is for the scheduler*/
+.segment-enabled:hover .cal-scheduler-time {
+  color: #FFFFFF !important;
+  cursor: pointer
+}
+.segment-enabled:hover {
+  background-color: #007bb6 !important;
+  cursor: pointer
+}
+.segment-disabled .cal-scheduler-time {
+  color: #cccccc !important;
+}

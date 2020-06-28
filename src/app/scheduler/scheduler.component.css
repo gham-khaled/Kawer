@@ -1,0 +1,19 @@
+
+
+.calendar-container {
+  border: 1px solid transparent;
+  border-color: #fff #ddd;
+  margin: 0 2em 2em;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 22px;
+  color: #4F4F4F;
+}
+
+.mat-progress-spinner::ng-deep circle {
+  stroke: #F4CE11;
+}
+
+
