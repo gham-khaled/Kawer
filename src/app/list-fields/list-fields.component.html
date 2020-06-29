@@ -1,1 +1,44 @@
-<p>list-fields works!</p>
+<div class="row  mt-5">
+  <div class="col-6 col-sm-3 p-0">
+    <input type="text" class="input light-gray-text" placeholder="Select a location" id="location">
+  </div>
+  <div class="col-6 col-sm-3 p-0">
+    <input type="number" class="input light-gray-text" placeholder="Select a number "
+           id="players" min="5" max="7">
+  </div>
+  <div class="col-6 col-sm-3 p-0 ">
+    <input type="text" (click)="picker.open()" [matDatepicker]="picker" [matDatepickerFilter]="myFilter"
+           class="input light-gray-text" placeholder="Select a date" id="date">
+  </div>
+  <div class="col-6 col-sm-3 p-0 select d-flex align-items-center">
+    <mat-select placeholder="Select an hour">
+      <mat-option *ngFor="let hour of hours" [value]="hour">
+        {{hour}}
+      </mat-option>
+    </mat-select>
+    <mat-datepicker color="#F4CE11" #picker></mat-datepicker>
+  </div>
+  <div class="mt-5 title col-12 mb-5">
+    Available Staduims
+  </div>
+  <div *ngFor="let fieldnumber of fieldImgs" class="col-12 row mt-3 mb-5  ">
+    <div class="col-sm-5  col-12  mr-sm-0  mb-3 d-sm-block d-flex justify-content-center">
+      <img src="assets/images/field-list/field-list-{{fieldnumber}}.png" alt="" class="img-fluid">
+    </div>
+    <div class="col-sm-5 col-12   pl-sm-0  ">
+      <div class="subtitle d-sm-inline-block d-flex justify-content-center">
+        Camp Nou Barcelona
+      </div>
+      <div class="light-gray-text description mt-1  d-sm-block d-flex justify-content-center ">
+        Barcelona, Spain
+      </div>
+      <div class="light-gray-text description mt-2 mb-5 pt-4  d-sm-block d-none">
+        A multi-purpose stadium in with a capacity of 99,354.
+      </div>
+      <div class="title price pt-3 d-sm-block d-flex justify-content-center">
+        $234 USD
+      </div>
+    </div>
+  </div>
+
+</div>

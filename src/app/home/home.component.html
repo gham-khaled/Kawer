@@ -11,7 +11,9 @@
           <input type="text" class="input light-gray-text" placeholder="Select a location" id="location">
         </div>
         <div class="col-4">
-          <input type="text" class="input light-gray-text" placeholder="Select a date?" id="date">
+          <input type="text" (click)="picker.open()" matInput [matDatepicker]="picker" [matDatepickerFilter]="myFilter"
+                 class="input light-gray-text" placeholder="Select a date?" id="date">
+          <mat-datepicker color="#F4CE11" #picker></mat-datepicker>
         </div>
         <div class="col-4">
           <input type="text" class="input light-gray-text" placeholder="Find a staduim?" id="staduim">
@@ -43,7 +45,7 @@
     <div class="card">
       <img class="card-img-top" src="assets/images/home/staduim2.png" alt="Card image cap">
       <div class="card-body">
-        <h5 class="card-title subtitle">El Menzah Stadium	</h5>
+        <h5 class="card-title subtitle">El Menzah Stadium </h5>
         <p class="card-text light-gray-text">
           Aryanah, Aryanah
         </p>
@@ -54,7 +56,7 @@
     <div class="card">
       <img class="card-img-top" src="assets/images/home/staduim3.png" alt="Card image cap">
       <div class="card-body">
-        <h5 class="card-title subtitle">Chedly Zouiten Stadium	</h5>
+        <h5 class="card-title subtitle">Chedly Zouiten Stadium </h5>
         <p class="card-text light-gray-text">
           Tunis, Tunis
         </p>
@@ -62,10 +64,10 @@
     </div>
   </div>
   <div class="col-sm-3 mt-3 col-6 mb-lg-5  d-flex justify-content-start  card-staduim">
-    <div class="card" >
+    <div class="card">
       <img class="card-img-top" src="assets/images/home/staduim4.png" alt="Card image cap">
       <div class="card-body">
-        <h5 class="card-title subtitle">7 March Stadium	</h5>
+        <h5 class="card-title subtitle">7 March Stadium </h5>
         <p class="card-text light-gray-text">
           Ben Gardane, Medenine
         </p>
@@ -85,6 +87,6 @@
       <input type="text" class="input light-gray-text" placeholder="Enter your email" id="inputNewsletter">
       <button class="btn">Subscribe</button>
     </div>
-    </div>
+  </div>
 
 </div>

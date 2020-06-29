@@ -1,0 +1,76 @@
+
+
+.input {
+  padding: 15px 10px 15px 15px;
+  border: none;
+  position: relative;
+  width: 100%;
+  border-right: 1px solid #ccc;
+  font-size: 18px;
+  line-height: 21px;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.15);
+  text-indent: 10px;
+  background-position: 90% 50%;
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.input::placeholder {
+  color: #828282;
+}
+
+#location {
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  background-image: url("../../assets/images/icons/pin.jpg");
+}
+
+#date {
+  background-image: url("../../assets/images/icons/calendar.png");
+}
+#players {
+  background-image: url("../../assets/images/icons/soccer.png");
+  background-position: 90% 50%;
+}
+
+.select {
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 15px 10px 15px 15px;
+  border: none;
+  position: relative;
+  width: 100%;
+  border-right: 1px solid #ccc;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.15);
+  background-image: url("../../assets/images/icons/clock.svg");
+  background-color: #FFFFFF;
+  background-position: 90% 50%;
+  background-repeat: no-repeat;
+  background-size: 8%;
+}
+
+:host::ng-deep .mat-select-placeholder, .mat-option , ::ng-deep .mat-select-value-text{
+  margin: 0px 15px;
+  font-size: 18px;
+  line-height: 21px;
+  color: #828282;
+}
+
+.list-fields {
+  background-color: #FFFFFF;
+}
+.col-4 img {
+  border-radius: 20px;
+  height: 100%;
+  width: 100%;
+}
+.price {
+  font-size: 20px;
+  line-height: 23px;
+  display: flex;
+}
+.description {
+  font-size: 17px;
+  line-height: 28px;
+  color: #828282;
+}

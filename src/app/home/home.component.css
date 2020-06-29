@@ -57,13 +57,13 @@
 #location {
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
-  background-image: url("../../assets/images/icons/Pin.jpg");
+  background-image: url("../../assets/images/icons/pin.jpg");
 }
 
 #date {
-  background-image: url("../../assets/images/icons/calendar 1.png");
-
+  background-image: url("../../assets/images/icons/calendar.png");
 }
+
 
 #staduim {
   border-bottom-right-radius: 10px;

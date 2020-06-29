@@ -12,9 +12,15 @@ import {FieldDetailComponent} from './field-detail/field-detail.component';
 import {CarouselComponent} from './carousel/carousel.component';
 import {adapterFactory} from "angular-calendar/date-adapters/date-fns";
 import {SchedulerComponent} from './scheduler/scheduler.component';
+import { ConfirmDialogComponent } from './scheduler/confirm-dialog/confirm-dialog.component';
+
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDialogModule} from "@angular/material/dialog";
-import { ConfirmDialogComponent } from './scheduler/confirm-dialog/confirm-dialog.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -38,7 +44,12 @@ import { ConfirmDialogComponent } from './scheduler/confirm-dialog/confirm-dialo
     }),
     SchedulerModule.forRoot({locale: 'en', headerDateFormat: 'daysRange'}),
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatButtonModule,
+    MatNativeDateModule,
+    MatSelectModule
   ],
 
   entryComponents: [

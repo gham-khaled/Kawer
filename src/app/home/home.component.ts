@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {isToday} from "date-fns";
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+  }
+
+  myFilter = (d: Date | null): boolean => {
+    const day = (d || new Date());
+    return day > new Date() || isToday(day)
   }
 
 }
