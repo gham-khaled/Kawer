@@ -10,7 +10,6 @@ export class FieldDetailComponent implements OnInit {
     { src: "assets/images/field-detail/main-photo.png" },
     { src: "assets/images/field-detail/thumbnail1.png" },
     { src: "assets/images/field-detail/main-photo.png" },
-    { src: "assets/images/field-detail/main-photo.png" },
     { src: "assets/images/field-detail/thumbnail2.png" },
   ];
   constructor() { }

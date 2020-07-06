@@ -1,0 +1,24 @@
+
+
+
+.name {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 42px;
+  color: #1F1A38;
+}
+.space {
+  height: 100px;
+}
+@media all and (min-width: 768px) {
+  .profile {
+    position: absolute;
+  }
+  .yellow-image {
+    background: url("../../assets/images/profile/yellow-bg.svg") top center no-repeat;
+    width: 100%;
+    height: 50vh;
+  }
+}

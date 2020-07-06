@@ -1,3 +1,8 @@
+.my-panel .mat-dialog-container {
+  overflow: hidden;
+  border-radius: 25px;
+  padding: 5px;
+}
 .title {
   font-weight: 500;
   font-size: 22px;

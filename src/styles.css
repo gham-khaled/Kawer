@@ -61,3 +61,20 @@ body {
 .segment-disabled .cal-scheduler-time {
   color: #cccccc !important;
 }
+/* This is for the X in the dialog components */
+
+.cdk-overlay-pane.my-dialog {
+  position: relative!important;
+}
+.close.mat-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-top: 6px;
+  line-height: 14px;
+  color: #A3A3A3;
+  width: 30px;
+  min-width: unset;
+  background-color: transparent;
+}
+

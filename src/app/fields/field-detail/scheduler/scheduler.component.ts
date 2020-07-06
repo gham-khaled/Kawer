@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject, LOCALE_ID, HostListener } from '@angular/core';
-import { Subject } from 'rxjs';
+import {Component, OnInit, Inject, LOCALE_ID, HostListener} from '@angular/core';
+import {Subject} from 'rxjs';
 
 import {
   endOfDay,
@@ -61,7 +61,7 @@ export class SchedulerComponent implements OnInit {
     this.adjustViewDays();
   }
 
-  constructor(@Inject(LOCALE_ID) locale: string,  private dateAdapter: DateAdapter,private dialog: MatDialog) {
+  constructor(@Inject(LOCALE_ID) locale: string, private dateAdapter: DateAdapter, private dialog: MatDialog) {
     this.locale = locale;
     this.segmentModifier = ((segment: SchedulerViewHourSegment): void => {
       segment.isDisabled = !this.isDateValid(segment.date);
@@ -121,30 +121,23 @@ export class SchedulerComponent implements OnInit {
   }
 
   private isDateValid(date: Date): boolean {
-    return  date.getTime() != new Date(2020,5,28,12).getTime() && date >= this.minDate && date <= this.maxDate;
-  }
-
-  dayHeaderClicked(day: SchedulerViewDay): void {
-    console.log('dayHeaderClicked Day', day);
-  }
-
-  hourClicked(hour: SchedulerViewHour): void {
-    console.log('hourClicked Hour', hour);
+    return date.getTime() != new Date(2020, 5, 28, 12).getTime() && date >= this.minDate && date <= this.maxDate;
   }
 
   segmentClicked(action: string, segment: SchedulerViewHourSegment): void {
-    if(!segment.isDisabled) {
-      this.dialog.open(ConfirmDialogComponent,{
+    if (!segment.isDisabled) {
+      this.dialog.open(ConfirmDialogComponent, {
         data: {
           price: 70,
           date: segment.date
         },
         width: '534px',
-        height: '450px'
+        height: '450px',
+        panelClass: 'my-dialog',
+        autoFocus: false
       })
     }
   }
-
 
 
 }

@@ -1,0 +1,50 @@
+.my-panel .mat-dialog-container {
+  overflow: hidden;
+  border-radius: 25px;
+  padding: 5px;
+}
+.title {
+  text-align: center;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field-flex > .mat-form-field-infix {
+  padding: 0.6em 0px !important;
+}
+
+.mat-form-field-label-wrapper {
+  top: -1.3em;
+}
+
+.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+  transform: translateY(-1.1em) scale(.75);
+  width: 133.33333%;
+}
+
+.yellow-button {
+  background: #F4CE11;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1), 0px -2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  color: #FFFFFF;
+  width: 100%;
+  padding-top: 2px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+.yellow-button:disabled {
+  background-color: #828282;
+}
+.mat-button:focus {
+  outline: none;
+}
+.mat-checkbox {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #828282;
+  text-decoration: underline ;
+}

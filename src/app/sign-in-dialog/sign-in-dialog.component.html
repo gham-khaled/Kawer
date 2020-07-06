@@ -1,0 +1,95 @@
+<button class="close" mat-button (click)="onNoClick()">x</button>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2 mat-dialog-title class="title">Sign Up</h2>
+    </div>
+  </div>
+
+  <!-----------------------------------------------------First Form------------------------------------------------>
+  <div [formGroup]="formInfo" *ngIf="formCounter===0" class="row">
+    <div class="col-12 py-1">
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your Name</mat-label>
+        <input matInput placeholder="Name" formControlName="name" required>
+        <mat-error *ngIf="formInfo.controls.name.errors">{{getErrorMessage(formInfo.controls.name)}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12 py-1">
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your Last Name</mat-label>
+        <input matInput placeholder="Last Name" formControlName="lastName" required>
+        <mat-error *ngIf="formInfo.controls.lastName.errors">{{getErrorMessage(formInfo.controls.lastName)}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12 py-1">
+      <mat-form-field appearance="outline">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput placeholder="dd/mm/yyyy" [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
+               formControlName="date" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker [startAt]="startDate" #picker></mat-datepicker>
+        <mat-error *ngIf="formInfo.controls.date.errors">{{getErrorMessage(formInfo.controls.date)}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12 py-1">
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder="pat@example.com" formControlName="email" required>
+        <mat-error *ngIf="formInfo.controls.email.errors">{{getErrorMessage(formInfo.controls.email)}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12 py-1 d-flex justify-content-center">
+      <button mat-button [disabled]="formInfo.invalid" (click)="incrementCounter()" class="yellow-button w-50">
+        Next >
+      </button>
+    </div>
+  </div>
+  <!-----------------------------------------------------Second Form------------------------------------------------>
+  <div [formGroup]="formUser" *ngIf="formCounter===1" class="row">
+    <div class="col-12 py-1">
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your Username</mat-label>
+        <input matInput placeholder="Username" formControlName="username" required>
+        <mat-error
+          *ngIf="formUser.controls.username.errors">{{getErrorMessage(formUser.controls.username)}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12 py-1">
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password" required>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="formUser.controls.password.errors">{{getErrorMessage(formUser.controls.password)}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12 py-1">
+      <mat-form-field appearance="outline">
+        <mat-label>Confirm your Password</mat-label>
+        <input matInput type="password" placeholder="Confirm Password" [errorStateMatcher]="matcher"
+               formControlName="confirmPassword" required>
+        <mat-error *ngIf="formUser.hasError('notSame')">
+          Passwords do not match
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12 py-1 mb-3 d-flex justify-content-center">
+      <mat-checkbox formControlName="newsletter">Subscribe to our newsletter</mat-checkbox>
+    </div>
+
+    <div class="col-12 py-1 d-flex justify-content-center">
+      <button mat-button (click)="decrementCounter()" class="yellow-button w-25 mx-1">
+        < Previous
+      </button>
+      <button mat-button [disabled]="formUser.invalid" (click)="incrementCounter()" class="yellow-button w-25 mx-1">
+        Submit
+      </button>
+    </div>
+  </div>
+</div>
+
+

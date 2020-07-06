@@ -22,14 +22,14 @@
 #location {
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
-  background-image: url("../../assets/images/icons/pin.jpg");
+  background-image: url("../../../assets/images/icons/pin.jpg");
 }
 
 #date {
-  background-image: url("../../assets/images/icons/calendar.png");
+  background-image: url("../../../assets/images/icons/calendar.png");
 }
 #players {
-  background-image: url("../../assets/images/icons/soccer.png");
+  background-image: url("../../../assets/images/icons/soccer.png");
   background-position: 90% 50%;
 }
 
@@ -42,7 +42,7 @@
   width: 100%;
   border-right: 1px solid #ccc;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.15);
-  background-image: url("../../assets/images/icons/clock.svg");
+  background-image: url("../../../assets/images/icons/clock.svg");
   background-color: #FFFFFF;
   background-position: 90% 50%;
   background-repeat: no-repeat;
