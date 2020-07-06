@@ -68,9 +68,21 @@
   font-size: 20px;
   line-height: 23px;
   display: flex;
+
 }
-.description {
+.gray-region {
   font-size: 17px;
   line-height: 28px;
   color: #828282;
+
+}
+.description {
+  height: 125px;
+  overflow: hidden;
+}
+.title {
+  text-align: start;
+}
+input:focus {
+  outline: none;
 }
