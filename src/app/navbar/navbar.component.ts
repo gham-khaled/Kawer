@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {MatDialog} from "@angular/material/dialog";
-import {SignInDialogComponent} from "../sign-in-dialog/sign-in-dialog.component";
-import {LoginDialogComponent} from "../login-dialog/login-dialog.component";
+import {SignInDialogComponent} from "../user/sign-in-dialog/sign-in-dialog.component";
+import {LoginDialogComponent} from "../user/login-dialog/login-dialog.component";
 
 @Component({
   selector: 'app-navbar',

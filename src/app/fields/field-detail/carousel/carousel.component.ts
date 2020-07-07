@@ -24,12 +24,13 @@ import { trigger, transition, style, animate } from "@angular/animations";
   ]
 })
 export class CarouselComponent implements OnInit {
-  @Input() slides;
-  currentSlide = 3;
+  @Input() slides: string[];
+  currentSlide = 0;
 
   constructor() { }
 
   ngOnInit(): void {
+
   }
   onPreviousClick() {
     const previous = this.currentSlide - 1;

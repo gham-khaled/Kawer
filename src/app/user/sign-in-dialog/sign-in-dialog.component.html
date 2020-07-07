@@ -47,7 +47,7 @@
     </div>
   </div>
   <!-----------------------------------------------------Second Form------------------------------------------------>
-  <div [formGroup]="formUser" *ngIf="formCounter===1" class="row">
+  <div [formGroup]="formUser" *ngIf="formCounter===1 && !isLoading" class="row">
     <div class="col-12 py-1">
       <mat-form-field appearance="outline">
         <mat-label>Enter your Username</mat-label>
@@ -90,6 +90,14 @@
       </button>
     </div>
   </div>
+
+  <div class="wrapper">
+    <mat-progress-spinner
+      *ngIf="isLoading"
+      mode="indeterminate"
+      class="mx-auto mt-5 pt-5 ">
+    </mat-progress-spinner>
+  </div>
+
+
 </div>
-
-

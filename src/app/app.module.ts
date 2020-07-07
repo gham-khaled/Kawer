@@ -21,13 +21,14 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {ProfileComponent} from './profile/profile.component';
-import {SignInDialogComponent} from './sign-in-dialog/sign-in-dialog.component';
+import {SignInDialogComponent} from './user/sign-in-dialog/sign-in-dialog.component';
 import {MatIconModule} from "@angular/material/icon";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import {LoginDialogComponent} from './login-dialog/login-dialog.component';
+import {LoginDialogComponent} from './user/login-dialog/login-dialog.component';
 import {FieldsComponent} from './fields/fields.component';
 import {AppRoutingModule} from "./app-routing.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import {AppRoutingModule} from "./app-routing.module";
     MatSelectModule,
     MatIconModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    HttpClientModule
   ],
 
   entryComponents: [

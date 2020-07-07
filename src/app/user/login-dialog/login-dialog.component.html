@@ -1,6 +1,14 @@
 <button class="close" mat-button (click)="onNoClick()">x</button>
 
-<div class="container">
+
+<mat-progress-spinner
+  *ngIf="isLoading"
+  mode="indeterminate"
+  class="mx-auto mt-5 pt-5 ">
+</mat-progress-spinner>
+
+
+<div class="container" *ngIf="!isLoading">
   <div class="row">
     <div class="col-12 d-flex justify-content-center">
       <h2 mat-dialog-title class="title">Login</h2>
@@ -16,14 +24,14 @@
     <div class="col-12 py-1">
       <mat-form-field appearance="outline">
         <mat-label>Enter your Password</mat-label>
-        <input matInput placeholder="Password" formControlName="password" required>
+        <input matInput placeholder="Password" formControlName="password" type="password" required>
       </mat-form-field>
     </div>
     <div class="col-12 py-1 mb-2">
       <mat-checkbox formControlName="remember" class="remember">Remember Me ?</mat-checkbox>
     </div>
     <div class="col-12 py-1 d-flex justify-content-center">
-      <button mat-button [disabled]="formLogin.invalid" class="yellow-button w-50">
+      <button mat-button [disabled]="formLogin.invalid" (click)="onLogin()" class="yellow-button w-50">
         Login
       </button>
     </div>

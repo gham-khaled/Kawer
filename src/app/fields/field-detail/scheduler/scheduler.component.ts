@@ -1,4 +1,4 @@
-import {Component, OnInit, Inject, LOCALE_ID, HostListener} from '@angular/core';
+import {Component, OnInit, Inject, LOCALE_ID, HostListener, Input} from '@angular/core';
 import {Subject} from 'rxjs';
 
 import {
@@ -55,7 +55,7 @@ export class SchedulerComponent implements OnInit {
   prevBtnDisabled: boolean = false;
   nextBtnDisabled: boolean = false;
   events = "Hours here"
-
+  @Input() fee: number ;
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.adjustViewDays();
@@ -128,7 +128,7 @@ export class SchedulerComponent implements OnInit {
     if (!segment.isDisabled) {
       this.dialog.open(ConfirmDialogComponent, {
         data: {
-          price: 70,
+          price: this.fee,
           date: segment.date
         },
         width: '534px',

@@ -77,4 +77,6 @@ body {
   min-width: unset;
   background-color: transparent;
 }
-
+.mat-progress-spinner circle {
+  stroke: #F4CE11;
+}

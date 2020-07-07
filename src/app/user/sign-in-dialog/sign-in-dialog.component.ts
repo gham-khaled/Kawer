@@ -22,7 +22,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class SignInDialogComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   hide: boolean = true;
-  formCounter: number = 0;
+  formCounter: number = 1;
+  isLoading = true
   formInfo: FormGroup = this.formBuilder.group({
     name: new FormControl('', [Validators.minLength(3)]),
     lastName: new FormControl('', [Validators.minLength(3)]),

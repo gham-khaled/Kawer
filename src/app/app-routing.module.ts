@@ -5,7 +5,7 @@ import {FieldsComponent} from "./fields/fields.component";
 import {ListFieldsComponent} from "./fields/list-fields/list-fields.component";
 import {FieldDetailComponent} from "./fields/field-detail/field-detail.component";
 import {ProfileComponent} from "./profile/profile.component";
-import {LoginDialogComponent} from "./login-dialog/login-dialog.component";
+import {LoginDialogComponent} from "./user/login-dialog/login-dialog.component";
 
 const routes: Routes = [
   {

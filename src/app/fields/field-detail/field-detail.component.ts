@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {FieldsService} from "../fields.service";
+import {Field} from "../field.model";
 
 @Component({
   selector: 'app-field-detail',
@@ -6,17 +9,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./field-detail.component.css']
 })
 export class FieldDetailComponent implements OnInit {
-  public slides = [
-    { src: "assets/images/field-detail/main-photo.png" },
-    { src: "assets/images/field-detail/thumbnail1.png" },
-    { src: "assets/images/field-detail/main-photo.png" },
-    { src: "assets/images/field-detail/thumbnail2.png" },
-  ];
-  constructor() { }
+  id: number;
+  field: Field
+
+  constructor(private fieldsService: FieldsService,
+              private route: ActivatedRoute,
+              private router: Router) {
+  }
 
   ngOnInit(): void {
+    this.route.params
+      .subscribe(
+        (params: Params) => {
+          this.id = +params['id'];
+          this.field = this.fieldsService.getFieldById(this.id);
+        }
+      );
+
   }
-  onActiveImage () {
+
+  onActiveImage() {
 
   }
 

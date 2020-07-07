@@ -7,3 +7,8 @@
   color: #828282;
   text-decoration: none;
 }
+.mat-progress-spinner {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+}
