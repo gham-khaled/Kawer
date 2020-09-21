@@ -29,6 +29,8 @@ import {LoginDialogComponent} from './user/login-dialog/login-dialog.component';
 import {FieldsComponent} from './fields/fields.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -66,7 +68,9 @@ import {HttpClientModule} from "@angular/common/http";
     MatIconModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSidenavModule,
+    MatListModule
   ],
 
   entryComponents: [

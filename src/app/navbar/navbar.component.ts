@@ -19,7 +19,7 @@ import {LoginDialogComponent} from "../user/login-dialog/login-dialog.component"
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  collapse = true
+  collapse = false
 
   constructor(private dialog: MatDialog) {
   }
@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit {
 
   onLogin() {
     const dialogRef = this.dialog.open(LoginDialogComponent, {
-      height: '400px',
+      height: '450px',
       width: '470px',
       panelClass: 'my-dialog',
       autoFocus: false
@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit {
 
   onSignIn() {
     const dialogRef = this.dialog.open(SignInDialogComponent, {
-      height: '500px',
+      height: '550px',
       width: '470px',
       panelClass: 'my-dialog',
       autoFocus: false

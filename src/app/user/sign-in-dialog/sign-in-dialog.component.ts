@@ -16,14 +16,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   selector: 'app-sign-in-dialog',
   templateUrl: './sign-in-dialog.component.html',
   styleUrls: ['./sign-in-dialog.component.css'],
-  encapsulation: ViewEncapsulation.None
 
 })
 export class SignInDialogComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   hide: boolean = true;
-  formCounter: number = 1;
-  isLoading = true
+  formCounter: number = 0;
+  isLoading = false
   formInfo: FormGroup = this.formBuilder.group({
     name: new FormControl('', [Validators.minLength(3)]),
     lastName: new FormControl('', [Validators.minLength(3)]),

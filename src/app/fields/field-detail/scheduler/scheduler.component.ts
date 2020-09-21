@@ -137,6 +137,13 @@ export class SchedulerComponent implements OnInit {
         autoFocus: false
       })
     }
+    segment.isDisabled = !this.isDateValid(segment.date);
+    segment.backgroundColor = !this.isDateValid(segment.date) ? "#cccccc" : ""
+    segment.cssClass = this.isDateValid(segment.date) ? "segment-enabled" : "segment-disabled"
+    this.adjustViewDays();
+    this.dateOrViewChanged();
+
+
   }
 
 

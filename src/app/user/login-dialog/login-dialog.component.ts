@@ -8,7 +8,6 @@ import {UserService} from "../user.service";
   selector: 'app-login-dialog',
   templateUrl: './login-dialog.component.html',
   styleUrls: ['../sign-in-dialog/sign-in-dialog.component.css', './login-dialog.component.css'],
-  encapsulation: ViewEncapsulation.None
 
 })
 export class LoginDialogComponent implements OnInit {

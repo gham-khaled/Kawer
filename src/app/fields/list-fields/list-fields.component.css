@@ -1,5 +1,4 @@
 
-
 .input {
   padding: 15px 10px 15px 15px;
   border: none;
@@ -28,6 +27,7 @@
 #date {
   background-image: url("../../../assets/images/icons/calendar.png");
 }
+
 #players {
   background-image: url("../../../assets/images/icons/soccer.png");
   background-position: 90% 50%;
@@ -49,7 +49,7 @@
   background-size: 8%;
 }
 
-:host::ng-deep .mat-select-placeholder, .mat-option , ::ng-deep .mat-select-value-text{
+:host::ng-deep .mat-select-placeholder, .mat-option, ::ng-deep .mat-select-value-text {
   margin: 0px 15px;
   font-size: 18px;
   line-height: 21px;
@@ -59,30 +59,46 @@
 .list-fields {
   background-color: #FFFFFF;
 }
+
 .col-4 img {
   border-radius: 20px;
   height: 100%;
   width: 100%;
 }
+
 .price {
   font-size: 20px;
   line-height: 23px;
   display: flex;
 
 }
+
 .gray-region {
   font-size: 17px;
   line-height: 28px;
   color: #828282;
 
 }
+
 .description {
   height: 125px;
   overflow: hidden;
 }
+
 .title {
   text-align: start;
 }
+
 input:focus {
   outline: none;
+}
+
+@media all and (max-width: 769px) {
+  .input {
+    border-radius: 10px;
+  }
+  .select {
+
+  }
+
 }

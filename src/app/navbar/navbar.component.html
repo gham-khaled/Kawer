@@ -3,7 +3,7 @@
   <button class="navbar-toggler" type="button" (click)="collapse = !collapse">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="navbar-collapse " [ngClass]="{'collapse': collapse} ">
+  <div class="navbar-collapse  collapse ">
     <ul class="navbar-nav mx-auto ">
       <li class="nav-item active">
         <button mat-button>
@@ -24,15 +24,51 @@
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item ">
-        <button mat-button (click)="onLogin()"  >
+        <button mat-button (click)="onLogin()">
           <div class="nav-link">Login</div>
         </button>
       </li>
       <li class="nav-item pl-lg-4 pr-2">
-        <button mat-button id="signUp"  (click)="onSignIn()">
-            <div class="nav-link">Sign up</div>
+        <button mat-button id="signUp" (click)="onSignIn()">
+          <div class="nav-link">Sign up</div>
         </button>
       </li>
     </ul>
   </div>
 </nav>
+<mat-sidenav-container>
+  <mat-sidenav [(opened)]="collapse" mode="over" #sidenav>
+    <mat-nav-list>
+
+      <a mat-list-item routerLinkActive="active" routerLink="" (click)="sidenav.close()">
+        <mat-icon>home</mat-icon>
+        Home
+      </a>
+
+      <a mat-list-item routerLinkActive="active" routerLink="/fields" (click)="sidenav.close()">
+        <mat-icon>sports_soccer</mat-icon>
+        Fields
+      </a>
+      <a mat-list-item routerLinkActive="active" routerLink="/contact" (click)="sidenav.close()">
+        <mat-icon>contact_page</mat-icon>
+        Contact
+      </a>
+      <a mat-list-item (click)="onLogin()">
+        <mat-icon>login</mat-icon>
+        Login
+      </a>
+      <a mat-list-item (click)="onSignIn()">
+        <mat-icon>person_add_alt</mat-icon>
+        Login
+      </a>
+
+      <a (click)="sidenav.toggle()" mat-list-item>
+        <mat-icon>close</mat-icon>
+        Close
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
