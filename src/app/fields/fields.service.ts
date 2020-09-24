@@ -27,6 +27,9 @@ export class FieldsService {
       ['Wifi', 'Lockers', 'Shower', 'Toilet', 'Artificial Turf'], 80),
     new Field(2, "Chedly Zouetin", "Tunis, Tunisia", this.description,
       "assets/images/field-list/field-list-3.png", this.slides,
+      ['Artificial Turf', 'Lockers', 'Shower', 'Toilet'], 20),
+    new Field(2, "Chedly Zouetin", "Tunis, Tunisia", this.description,
+      "assets/images/field-list/field-list-3.png", this.slides,
       ['Artificial Turf', 'Lockers', 'Shower', 'Toilet'], 20)
   ]
 

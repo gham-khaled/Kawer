@@ -31,6 +31,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
@@ -49,29 +50,30 @@ import {MatListModule} from "@angular/material/list";
     FieldsComponent
   ],
 
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }),
-    SchedulerModule.forRoot({locale: 'en', headerDateFormat: 'daysRange'}),
-    MatProgressSpinnerModule,
-    MatDialogModule,
-    MatDatepickerModule,
-    MatInputModule,
-    MatButtonModule,
-    MatNativeDateModule,
-    MatSelectModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatCheckboxModule,
-    HttpClientModule,
-    MatSidenavModule,
-    MatListModule
-  ],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        CalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory,
+        }),
+        SchedulerModule.forRoot({locale: 'en', headerDateFormat: 'daysRange'}),
+        MatProgressSpinnerModule,
+        MatDialogModule,
+        MatDatepickerModule,
+        MatInputModule,
+        MatButtonModule,
+        MatNativeDateModule,
+        MatSelectModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatCheckboxModule,
+        HttpClientModule,
+        MatSidenavModule,
+        MatListModule,
+        MatTabsModule
+    ],
 
   entryComponents: [
     ConfirmDialogComponent,
