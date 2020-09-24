@@ -9,16 +9,16 @@
       </div>
       <div class="wrapper">
         <div class="row no-gutters">
-          <div class="col-4">
+          <div class="col-12 col-sm-4 mb-2">
             <input type="text" class="input light-gray-text" placeholder="Select a location" id="location">
           </div>
-          <div class="col-4">
+          <div class="col-12 col-sm-4 mb-2">
             <input type="text" (click)="picker.open()" matInput [matDatepicker]="picker"
                    [matDatepickerFilter]="myFilter"
                    class="input light-gray-text" placeholder="Select a date?" id="date">
             <mat-datepicker color="#F4CE11" #picker></mat-datepicker>
           </div>
-          <div class="col-4">
+          <div class="col-12 col-sm-4 mb-2">
             <input type="text" class="input light-gray-text" placeholder="Find a staduim?" id="staduim">
           </div>
 
@@ -27,7 +27,7 @@
     </div>
     <!-------------------------------------- Card football Items--------------------------------------->
 
-    <div class="col-12 title mt-sm-5 mt-3">
+    <div class="col-12 title  mt-5">
       Popular near you
     </div>
     <div class="col-12 subtitle mt-3 mb-lg-4 ">
