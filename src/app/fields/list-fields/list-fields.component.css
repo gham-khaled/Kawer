@@ -1,3 +1,6 @@
+agm-map {
+  height: 60vh;
+}
 
 .input {
   padding: 15px 10px 15px 15px;
@@ -97,6 +100,7 @@ input:focus {
   .input {
     border-radius: 10px;
   }
+
   .select {
 
   }

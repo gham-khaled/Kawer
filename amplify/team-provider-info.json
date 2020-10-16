@@ -1,0 +1,15 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-kawer-dev-191159-authRole",
+            "UnauthRoleArn": "arn:aws:iam::225459891775:role/amplify-kawer-dev-191159-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::225459891775:role/amplify-kawer-dev-191159-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-kawer-dev-191159-deployment",
+            "UnauthRoleName": "amplify-kawer-dev-191159-unauthRole",
+            "StackName": "amplify-kawer-dev-191159",
+            "StackId": "arn:aws:cloudformation:us-east-1:225459891775:stack/amplify-kawer-dev-191159/efb72f20-05a3-11eb-984a-0ec446493c7d",
+            "AmplifyAppId": "d11a02602ooo7"
+        }
+    }
+}

@@ -7,11 +7,7 @@ import {AppComponent} from './app.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {HomeComponent} from './home/home.component';
 import {FooterComponent} from './footer/footer.component';
-import {ListFieldsComponent} from './fields/list-fields/list-fields.component';
-import {FieldDetailComponent} from './fields/field-detail/field-detail.component';
-import {CarouselComponent} from './fields/field-detail/carousel/carousel.component';
 import {adapterFactory} from "angular-calendar/date-adapters/date-fns";
-import {SchedulerComponent} from './fields/field-detail/scheduler/scheduler.component';
 import {ConfirmDialogComponent} from './fields/field-detail/scheduler/confirm-dialog/confirm-dialog.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDialogModule} from "@angular/material/dialog";
@@ -21,17 +17,24 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {ProfileComponent} from './profile/profile.component';
-import {SignInDialogComponent} from './user/sign-in-dialog/sign-in-dialog.component';
+import {SignUpDialogComponent} from './user/sign-in-dialog/sign-up-dialog.component';
 import {MatIconModule} from "@angular/material/icon";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {LoginDialogComponent} from './user/login-dialog/login-dialog.component';
-import {FieldsComponent} from './fields/fields.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import {MatTabsModule} from "@angular/material/tabs";
+import {AmplifyUIAngularModule} from '@aws-amplify/ui-angular';
+import {AgmCoreModule} from '@agm/core';
+
+import Amplify from 'aws-amplify';
+import awsconfig from '../aws-exports';
+
+Amplify.configure(awsconfig);
+
 
 @NgModule({
   declarations: [
@@ -39,50 +42,49 @@ import {MatTabsModule} from "@angular/material/tabs";
     NavbarComponent,
     HomeComponent,
     FooterComponent,
-    ListFieldsComponent,
-    FieldDetailComponent,
-    CarouselComponent,
-    SchedulerComponent,
-    ConfirmDialogComponent,
+
     ProfileComponent,
-    SignInDialogComponent,
+    SignUpDialogComponent,
     LoginDialogComponent,
-    FieldsComponent
   ],
 
-    imports: [
-        AppRoutingModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        CalendarModule.forRoot({
-            provide: DateAdapter,
-            useFactory: adapterFactory,
-        }),
-        SchedulerModule.forRoot({locale: 'en', headerDateFormat: 'daysRange'}),
-        MatProgressSpinnerModule,
-        MatDialogModule,
-        MatDatepickerModule,
-        MatInputModule,
-        MatButtonModule,
-        MatNativeDateModule,
-        MatSelectModule,
-        MatIconModule,
-        ReactiveFormsModule,
-        MatCheckboxModule,
-        HttpClientModule,
-        MatSidenavModule,
-        MatListModule,
-        MatTabsModule
-    ],
+  imports: [
+    AppRoutingModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    }),
+    SchedulerModule.forRoot({locale: 'en', headerDateFormat: 'daysRange'}),
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatButtonModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatCheckboxModule,
+    HttpClientModule,
+    MatSidenavModule,
+    MatListModule,
+    MatTabsModule,
+    AmplifyUIAngularModule
+  ],
 
   entryComponents: [
     ConfirmDialogComponent,
-    SignInDialogComponent,
+    SignUpDialogComponent,
     LoginDialogComponent
   ],
 
   providers: [
-    {provide: LOCALE_ID, useValue: 'en-US'}
+    {provide: LOCALE_ID, useValue: 'en-US'},
   ],
 
   bootstrap: [AppComponent]

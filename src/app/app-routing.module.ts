@@ -9,7 +9,7 @@ import {LoginDialogComponent} from "./user/login-dialog/login-dialog.component";
 
 const routes: Routes = [
   {
-    path: '',
+    path: ' ',
     component: HomeComponent
   },
 

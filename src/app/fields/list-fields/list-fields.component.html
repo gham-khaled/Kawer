@@ -1,4 +1,5 @@
 <div class="row  mt-sm-5 mt-3">
+  <!-- ----------------------------------------------FILTERS--------------------------------------------------------->
   <div class="col-12 col-sm-3 p-sm-0 my-2">
     <input type="text" class="input light-gray-text" placeholder="Select a location" id="location">
   </div>
@@ -18,6 +19,43 @@
     </mat-select>
     <mat-datepicker color="#F4CE11" #picker></mat-datepicker>
   </div>
+
+  <!-- ----------------------------------------------MAP--------------------------------------------------------->
+  <div class="col-12">
+    <agm-map
+      [latitude]="lat"
+      [longitude]="lng"
+      [zoom]="zoom"
+      [disableDefaultUI]="false">
+
+      <agm-marker
+        *ngFor="let m of markers; let i = index"
+        (markerClick)="clickedMarker(m.label, i)"
+        [latitude]="m.lat"
+        [longitude]="m.lng"
+        [label]="m.label"
+        [markerDraggable]="m.draggable"
+        (dragEnd)="markerDragEnd(m, $event)">
+
+        <agm-info-window>
+          <strong>InfoWindow content</strong>
+        </agm-info-window>
+
+      </agm-marker>
+
+      <agm-circle [latitude]="lat + 0.3" [longitude]="lng"
+                  [radius]="5000"
+                  [fillColor]="'red'"
+                  [circleDraggable]="false"
+                  [editable]="true">
+      </agm-circle>
+
+    </agm-map>
+
+  </div>
+
+  <!-- ----------------------------------------------FIELDS LIST--------------------------------------------------------->
+
   <div class="my-sm-5 my-3 title col-12 d-sm-inline-block d-flex justify-content-center">
     Available Staduims
   </div>
@@ -29,7 +67,7 @@
     </div>
     <div class="col-sm-5 col-12   pl-sm-0  ">
       <div class=" d-sm-inline-block d-flex justify-content-center">
-        <a  routerLink="{{field.id}}" class="subtitle">{{field.name}}</a>
+        <a routerLink="{{field.id}}" class="subtitle">{{field.name}}</a>
       </div>
       <div class="light-gray-text gray-region mt-1  d-sm-block d-flex justify-content-center ">
         {{field.region}}

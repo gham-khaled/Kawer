@@ -8,10 +8,40 @@ import {Field} from "../field.model";
   templateUrl: './list-fields.component.html',
   styleUrls: ['./list-fields.component.css']
 })
+
+
 export class ListFieldsComponent implements OnInit {
+  // google maps zoom level
+  zoom: number = 12;
+
+  // initial center position for the map
+  lat: number = 51.673858;
+  lng: number = 7.815982;
+  markers: marker[] = [
+    {
+      lat: 51.673858,
+      lng: 7.815982,
+      label: '90',
+      draggable: false
+    },
+    {
+      lat: 51.373858,
+      lng: 7.215982,
+      label: 'B',
+      draggable: false
+    },
+    {
+      lat: 51.723858,
+      lng: 7.895982,
+      label: 'C',
+      draggable: true
+    }
+  ]
 
   hours = []
-  fields : Field[]
+  fields: Field[]
+
+
   constructor(private fieldsService: FieldsService) {
   }
 
@@ -27,6 +57,24 @@ export class ListFieldsComponent implements OnInit {
     return day > new Date() || isToday(day)
   }
 
+  clickedMarker(label: string, index: number) {
+    console.log(`clicked the marker: ${label || index}`)
+  }
 
 
+  markerDragEnd(m: marker, $event: google.maps.MouseEvent) {
+    console.log('dragEnd', m, $event);
+  }
+
+  mapClicked(event) {
+    console.log("Map Clicked", event);
+  }
+}
+
+// just an interface for type safety.
+interface marker {
+  lat: number;
+  lng: number;
+  label?: string;
+  draggable: boolean;
 }

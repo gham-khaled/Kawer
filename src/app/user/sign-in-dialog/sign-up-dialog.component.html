@@ -5,8 +5,15 @@
     <div class="col-12">
       <h2 mat-dialog-title class="title">Sign Up</h2>
     </div>
+
   </div>
 
+  <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show mb-3 " role="alert">
+    {{errorMessage}}
+    <button (click)="this.errorMessage = null" type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
   <!-----------------------------------------------------First Form------------------------------------------------>
   <div [formGroup]="formInfo" *ngIf="formCounter===0" class="row">
     <div class="col-12 py-1">
@@ -19,27 +26,23 @@
     <div class="col-12 py-1">
       <mat-form-field appearance="outline">
         <mat-label>Enter your Last Name</mat-label>
-        <input matInput placeholder="Last Name" formControlName="lastName" required>
-        <mat-error *ngIf="formInfo.controls.lastName.errors">{{getErrorMessage(formInfo.controls.lastName)}}</mat-error>
+        <input matInput placeholder="Last Name" formControlName="family_name" required>
+        <mat-error
+          *ngIf="formInfo.controls.family_name.errors">{{getErrorMessage(formInfo.controls.family_name)}}</mat-error>
       </mat-form-field>
     </div>
     <div class="col-12 py-1">
       <mat-form-field appearance="outline">
         <mat-label>Date of Birth</mat-label>
         <input matInput placeholder="dd/mm/yyyy" [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
-               formControlName="date" required>
+               formControlName="birthdate" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker [startAt]="startDate" #picker></mat-datepicker>
-        <mat-error *ngIf="formInfo.controls.date.errors">{{getErrorMessage(formInfo.controls.date)}}</mat-error>
+        <mat-error
+          *ngIf="formInfo.controls.birthdate.errors">{{getErrorMessage(formInfo.controls.birthdate)}}</mat-error>
       </mat-form-field>
     </div>
-    <div class="col-12 py-1">
-      <mat-form-field appearance="outline">
-        <mat-label>Enter your email</mat-label>
-        <input matInput placeholder="pat@example.com" formControlName="email" required>
-        <mat-error *ngIf="formInfo.controls.email.errors">{{getErrorMessage(formInfo.controls.email)}}</mat-error>
-      </mat-form-field>
-    </div>
+
     <div class="col-12 py-1 d-flex justify-content-center">
       <button mat-button [disabled]="formInfo.invalid" (click)="incrementCounter()" class="yellow-button w-50">
         Next >
@@ -50,10 +53,9 @@
   <div [formGroup]="formUser" *ngIf="formCounter===1 && !isLoading" class="row">
     <div class="col-12 py-1">
       <mat-form-field appearance="outline">
-        <mat-label>Enter your Username</mat-label>
-        <input matInput placeholder="Username" formControlName="username" required>
-        <mat-error
-          *ngIf="formUser.controls.username.errors">{{getErrorMessage(formUser.controls.username)}}</mat-error>
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder="pat@example.com" formControlName="email" required>
+        <mat-error *ngIf="formUser.controls.email.errors">{{getErrorMessage(formUser.controls.email)}}</mat-error>
       </mat-form-field>
     </div>
     <div class="col-12 py-1">
@@ -85,11 +87,33 @@
       <button mat-button (click)="decrementCounter()" class="yellow-button w-25 mx-1">
         < Previous
       </button>
-      <button mat-button [disabled]="formUser.invalid" (click)="incrementCounter()" class="yellow-button w-25 mx-1">
+      <button mat-button [disabled]="formUser.invalid" (click)="onSignUp()" class="yellow-button w-25 mx-1">
         Submit
       </button>
     </div>
   </div>
+  <!-----------------------------------------------------Third Form------------------------------------------------>
+  <div [formGroup]="formCode" *ngIf="formCounter===2 && !isLoading" class="row ">
+    <div class="col-12 pt-1">
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your code</mat-label>
+        <input matInput placeholder="Ex: 123456" formControlName="code" required>
+        <mat-error *ngIf="formCode.controls.code.errors">{{getErrorMessage(formCode.controls.code)}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12 pb-5">
+      <button mat-button color="primary" (click)="onResendCode()">
+        Resend Code
+      </button>
+    </div>
+    <div class="col-12 d-flex justify-content-center">
+      <button mat-button [disabled]="formCode.invalid" (click)="onSendCode()" class="yellow-button w-75 mx-1">
+        Confirm Code
+      </button>
+    </div>
+
+  </div>
+
 
   <div class="wrapper">
     <mat-progress-spinner
