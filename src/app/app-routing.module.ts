@@ -6,6 +6,7 @@ import {ListFieldsComponent} from "./fields/list-fields/list-fields.component";
 import {FieldDetailComponent} from "./fields/field-detail/field-detail.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {LoginDialogComponent} from "./user/login-dialog/login-dialog.component";
+import {AddFieldComponent} from "./fields/add-field/add-field.component";
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
     component: FieldsComponent,
     children: [
       {path: '', component: ListFieldsComponent},
+      {path: 'add', component: AddFieldComponent},
       {
         path: ':id',
         component: FieldDetailComponent,

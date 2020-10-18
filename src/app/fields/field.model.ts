@@ -18,4 +18,15 @@ export class Field {
     this.amenities = amenities;
     this.fees = fees;
   }
+  // constructor(public name: string,
+  //             public latitude: number,
+  //             public longitude: number,
+  //             public description: string,
+  //             public main_image: string,
+  //             public reservations: string[],
+  //             public number_players: number,
+  //             public amenities: string[],
+  //             public price: number) {
+  //
+  // }
 }

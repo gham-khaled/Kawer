@@ -1,84 +1,96 @@
+<form [formGroup]="formInput" >
+
 <div class="row  mt-sm-5 mt-3">
   <!-- ----------------------------------------------FILTERS--------------------------------------------------------->
-  <div class="col-12 col-sm-3 p-sm-0 my-2">
-    <input type="text" class="input light-gray-text" placeholder="Select a location" id="location">
-  </div>
-  <div class="col-12 col-sm-3 p-sm-0 my-2">
-    <input type="number" class="input light-gray-text" placeholder="Select a number "
-           id="players" min="5" max="7">
-  </div>
-  <div class="col-12 col-sm-3 p-sm-0 my-2">
-    <input type="text" (click)="picker.open()" [matDatepicker]="picker" [matDatepickerFilter]="myFilter"
-           class="input light-gray-text" placeholder="Select a date" id="date">
-  </div>
-  <div class="col-11 ml-sm-0 ml-3 col-sm-3 p-sm-0  my-2  select d-flex align-items-center">
-    <mat-select placeholder="Select an hour">
-      <mat-option *ngFor="let hour of hours" [value]="hour">
-        {{hour}}
-      </mat-option>
-    </mat-select>
-    <mat-datepicker color="#F4CE11" #picker></mat-datepicker>
-  </div>
 
-  <!-- ----------------------------------------------MAP--------------------------------------------------------->
-  <div class="col-12">
-    <agm-map
-      [latitude]="lat"
-      [longitude]="lng"
-      [zoom]="zoom"
-      [disableDefaultUI]="false">
+    <div class="col-12 col-sm-3 p-sm-0 my-2">
+      <input type="text"  class="input light-gray-text"
+             placeholder="Select a location"
 
-      <agm-marker
-        *ngFor="let m of markers; let i = index"
-        (markerClick)="clickedMarker(m.label, i)"
-        [latitude]="m.lat"
-        [longitude]="m.lng"
-        [label]="m.label"
-        [markerDraggable]="m.draggable"
-        (dragEnd)="markerDragEnd(m, $event)">
-
-        <agm-info-window>
-          <strong>InfoWindow content</strong>
-        </agm-info-window>
-
-      </agm-marker>
-
-      <agm-circle [latitude]="lat + 0.3" [longitude]="lng"
-                  [radius]="5000"
-                  [fillColor]="'red'"
-                  [circleDraggable]="false"
-                  [editable]="true">
-      </agm-circle>
-
-    </agm-map>
-
-  </div>
-
-  <!-- ----------------------------------------------FIELDS LIST--------------------------------------------------------->
-
-  <div class="my-sm-5 my-3 title col-12 d-sm-inline-block d-flex justify-content-center">
-    Available Staduims
-  </div>
-  <div *ngFor="let field of fields" class="col-12 row mt-3 mb-5 mr-sm-3 ml-1 ml-md-n3">
-    <div class="col-sm-5  col-12  mr-sm-0  mb-3 d-sm-block d-flex justify-content-center">
-      <a routerLink="{{field.id}}">
-        <img src="{{field.imageThumbnailPath}}" alt="" class="img-fluid">
-      </a>
+              id="location">
     </div>
-    <div class="col-sm-5 col-12   pl-sm-0  ">
-      <div class=" d-sm-inline-block d-flex justify-content-center">
-        <a routerLink="{{field.id}}" class="subtitle">{{field.name}}</a>
-      </div>
-      <div class="light-gray-text gray-region mt-1  d-sm-block d-flex justify-content-center ">
-        {{field.region}}
-      </div>
-      <div class="light-gray-text gray-region description mt-1  pt-3  d-sm-block d-none">
-        {{field.description}}
-      </div>
-      <div class="title price pt-4  d-sm-block d-flex justify-content-center ">
-        ${{field.fees}} USD
-      </div>
+
+    <div class="col-12 col-sm-3 p-sm-0 my-2">
+      <input type="number" class="input light-gray-text" placeholder="Select a number " formControlName="number"
+             id="players" min="3" max="8">
+    </div>
+
+    <div class="col-12 col-sm-3 p-sm-0 my-2">
+      <input type="text" (click)="picker.open()" [matDatepicker]="picker" [matDatepickerFilter]="myFilter"
+             formControlName="date" class="input light-gray-text" placeholder="Select a date" id="date">
+    </div>
+
+    <div class="col-11 ml-sm-0 ml-3 col-sm-3 p-sm-0  my-2  select d-flex align-items-center">
+      <mat-select formControlName="hour" placeholder="Select an hour">
+        <mat-option *ngFor="let hour of hours" [value]="hour">
+          {{hour}}
+        </mat-option>
+      </mat-select>
+      <mat-datepicker color="#F4CE11" #picker></mat-datepicker>
+    </div>
+</div>
+</form>
+
+<div class="row">
+<!-- ----------------------------------------------MAP--------------------------------------------------------->
+<div class="col-12">
+  <agm-map
+    [latitude]="lat"
+    [longitude]="lng"
+    [zoom]="zoom"
+    [disableDefaultUI]="false">
+
+    <agm-marker
+      *ngFor="let m of markers; let i = index"
+      (markerClick)="clickedMarker(m.label, i)"
+      [latitude]="m.lat"
+      [longitude]="m.lng"
+      [label]="m.label"
+      [markerDraggable]="m.draggable"
+      (dragEnd)="markerDragEnd(m, $event)">
+
+      <agm-info-window>
+        <strong>InfoWindow content</strong>
+      </agm-info-window>
+
+    </agm-marker>
+
+    <agm-circle [latitude]="lat + 0.3" [longitude]="lng"
+                [radius]="5000"
+                [fillColor]="'red'"
+                [circleDraggable]="false"
+                [editable]="true">
+    </agm-circle>
+
+  </agm-map>
+
+</div>
+
+<!-- ----------------------------------------------FIELDS LIST--------------------------------------------------------->
+
+<div class="my-sm-5 my-3 title col-12 d-sm-inline-block d-flex justify-content-center">
+  Available Staduims
+</div>
+<div *ngFor="let field of fields" class="col-12 row mt-3 mb-5 mr-sm-3 ml-1 ml-md-n3">
+  <div class="col-sm-5  col-12  mr-sm-0  mb-3 d-sm-block d-flex justify-content-center">
+    <a routerLink="{{field.id}}">
+      <img src="{{field.imageThumbnailPath}}" alt="" class="img-fluid">
+    </a>
+  </div>
+  <div class="col-sm-5 col-12   pl-sm-0  ">
+    <div class=" d-sm-inline-block d-flex justify-content-center">
+      <a routerLink="{{field.id}}" class="subtitle">{{field.name}}</a>
+    </div>
+    <div class="light-gray-text gray-region mt-1  d-sm-block d-flex justify-content-center ">
+      {{field.region}}
+    </div>
+    <div class="light-gray-text gray-region description mt-1  pt-3  d-sm-block d-none">
+      {{field.description}}
+    </div>
+    <div class="title price pt-4  d-sm-block d-flex justify-content-center ">
+      ${{field.fees}} USD
     </div>
   </div>
+</div>
 
 </div>

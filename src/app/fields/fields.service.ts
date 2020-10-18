@@ -2,8 +2,8 @@ import {Injectable} from "@angular/core";
 import {Subject} from "rxjs";
 import {Field} from "./field.model";
 import {forEachComment} from "tslint";
-import {HttpClient} from "@angular/common/http";
 import {map, tap} from "rxjs/operators";
+import {API} from "aws-amplify";
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,7 @@ export class FieldsService {
       ['Artificial Turf', 'Lockers', 'Shower', 'Toilet'], 20)
   ]
 
-  constructor(private http: HttpClient) {
+  constructor() {
   }
 
   getFields() {
@@ -48,23 +48,16 @@ export class FieldsService {
     }
   }
 
-  fetchFields() {
-    return this.http
-      .get<Field[]>(
-        'API'
-      )
-      .pipe(
-        map(fields => {
-          return fields.map(field => {
-            return {
-              ...field,
-              imagesPath: this.slides
-            };
-          });
-        }),
-        tap(fields => {
-          this.fields = fields;
-        })
-      );
+  async fetchData(queryString) {
+    try {
+      const items = await API.get('kawer-api', '/field', {
+        'queryStringParameters': queryString
+      })
+      console.log(items);
+    }
+    catch (e) {
+      console.log(e);
+    }
+
   }
 }

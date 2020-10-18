@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {isToday} from "date-fns";
 import {FieldsService} from "../fields.service";
 import {Field} from "../field.model";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {debounceTime} from 'rxjs/operators';
+import {API} from 'aws-amplify';
 
 @Component({
   selector: 'app-list-fields',
@@ -37,19 +40,34 @@ export class ListFieldsComponent implements OnInit {
       draggable: true
     }
   ]
-
+  queryStringParameters = {}
   hours = []
   fields: Field[]
 
 
-  constructor(private fieldsService: FieldsService) {
+  constructor(private fieldsService: FieldsService, private formBuilder: FormBuilder) {
   }
+
+  formInput: FormGroup = this.formBuilder.group({
+    number: new FormControl('',),
+    date: new FormControl('',),
+    hour: new FormControl('',),
+    price: new FormControl('')
+  })
 
   ngOnInit(): void {
     for (let i = 9; i < 22; i++) {
       this.hours.push(i)
     }
     this.fields = this.fieldsService.getFields()
+    this.queryStringParameters = {...this.formInput.value}
+    console.log(this.queryStringParameters);
+    Object.keys(this.formInput.controls).forEach(key => {
+      this.formInput.get(key).valueChanges.pipe(debounceTime(800)).subscribe(async value => {
+        console.log(value);
+        await this.fieldsService.fetchData(this.formInput.value)
+      });
+    })
   }
 
   myFilter = (d: Date | null): boolean => {
@@ -69,6 +87,8 @@ export class ListFieldsComponent implements OnInit {
   mapClicked(event) {
     console.log("Map Clicked", event);
   }
+
+
 }
 
 // just an interface for type safety.

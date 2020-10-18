@@ -35,6 +35,8 @@ export class LoginDialogComponent implements OnInit {
     const password = this.formLogin.value.password;
     try {
       await this.userService.login(username, password)
+      console.log("Finished login from dialog")
+
       this.onNoClick()
     } catch (error) {
       console.log('error signing in', error);

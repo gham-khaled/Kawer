@@ -1,22 +1,21 @@
-import {Injectable, OnInit} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {Auth} from 'aws-amplify';
+import {Subject} from "rxjs";
+import {User} from "./user.model";
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService  {
-  user = null
-  isLoggedIn: boolean = !!this.user
+export class UserService {
+  user = new Subject<User>()
   session = null
 
   constructor() {
-       Auth.currentAuthenticatedUser()
-        .then(user => {
-          this.user = user
-          this.isLoggedIn = true
-          console.log("User Authenticated")
-        })
-        .catch(error => console.log("Not Authenticated"))
+    Auth.currentAuthenticatedUser()
+      .then(user => {
+        this.user.next(this._createUser(user))
+      })
+      .catch(error => console.log("Not Authenticated"))
   }
 
 
@@ -25,14 +24,15 @@ export class UserService  {
   }
 
   async login(username: string, password: string) {
-    const user = await Auth.signIn(username, password);
-    console.log(user);
-    this.isLoggedIn = true
-    this.user = user
+    const newUser = await Auth.signIn(username, password)
+    this.user.next(this._createUser(newUser))
   }
-  async signOut () {
-    await  Auth.signOut()
+
+  async signOut() {
+    await Auth.signOut()
+    this.user.next(null)
   }
+
   async signUp(username: string, password: string, email: string, name: string, family_name: string, birthdate: string) {
     const {user} = await Auth.signUp({
       username,
@@ -56,5 +56,9 @@ export class UserService  {
     await Auth.resendSignUp(username);
   }
 
-
+  private _createUser(user) {
+    const groups = user.signInUserSession.accessToken.payload["cognito:groups"]
+    const {name, family_name, birthdate, email, picture} = user.attributes
+    return new User(name, family_name, email, picture, birthdate, groups)
+  }
 }

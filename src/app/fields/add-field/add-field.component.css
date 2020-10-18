@@ -1,0 +1,23 @@
+.light-blue-text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  color: #424242;
+}
+.yellow-button {
+  background: #F4CE11;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1), 0px -2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  color: #FFFFFF;
+  width: 100%;
+  padding-top: 2px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+.yellow-button:disabled {
+  background-color: #828282;
+}

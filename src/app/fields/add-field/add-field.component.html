@@ -1,0 +1,91 @@
+<div class="row">
+  <div class="col-12 title text-center my-3">
+    Add Field
+  </div>
+</div>
+<div [formGroup]="formField" class="">
+  <div class="row">
+    <mat-form-field appearance="outline" class="col-md-5 col-12 py-1">
+      <mat-label>Enter your Name</mat-label>
+      <input matInput placeholder="Name" formControlName="name" required>
+      <mat-error *ngIf="formField.controls.name.errors">{{getErrorMessage(formField.controls.name)}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-md-5 offset-md-1 col-12 py-1">
+      <mat-label>Enter Number Of players per team</mat-label>
+      <input matInput placeholder="Ex: 7" formControlName="number_players" type="number" min="3" max="8" required>
+      <mat-error
+        *ngIf="formField.controls.number_players.errors">{{getErrorMessage(formField.controls.number_players)}}</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field appearance="outline" class="col-md-5 col-12 py-1">
+      <mat-label>Enter your Description</mat-label>
+      <textarea matInput placeholder="Description" maxlength="300" formControlName="description" required></textarea>
+      <mat-error
+        *ngIf="formField.controls.description.errors">{{getErrorMessage(formField.controls.description)}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-md-5 offset-md-1 col-12 py-1">
+      <mat-label>Enter Price</mat-label>
+      <input matInput class="text-right align-text-bottom" placeholder="Price" formControlName="price" type="number"
+             required>
+      <mat-error *ngIf="formField.controls.price.errors">{{getErrorMessage(formField.controls.price)}}</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <div class="col-12 subtitle pb-2">Amenities</div>
+    <div class="col-md-4 col-6 light-blue-text my-1" *ngFor="let amenitie of amenities">
+      <mat-checkbox (change)="onChange($event)" [value]="amenitie.name">
+        <img src="../../../assets/images/icons/{{amenitie.name.toLowerCase()}}.png" class="mr-1"
+             alt="">{{amenitie.name}}
+      </mat-checkbox>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 subtitle my-2">Location</div>
+    <div class="col-12">
+      <agm-map style="height: 50vh"
+        [latitude]="center_lat"
+        [longitude]="center_long"
+        [zoom]="zoom"
+        [disableDefaultUI]="false"
+               [showDefaultInfoWindow]="false"
+        >
+
+        <agm-marker
+          [latitude]="lat"
+          [longitude]="long"
+          animation="BOUNCE"
+          title="Drag Me"
+          [markerDraggable]="true"
+          (dragEnd)="onDragEnd( $event)">
+        >
+
+        </agm-marker>
+
+      </agm-map>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <mat-file-upload
+        [labelText]="'Select a file (or multiple) to upload:'"
+        [selectButtonText]="'Choose File(s)'"
+        [uploadButtonText]="'Submit'"
+        [allowMultipleFiles]="true"
+        [showUploadButton]="false"
+        [acceptedTypes]="'.png, .jpg, .jpeg'"
+        (selectedFilesChanged) = onFileComplete($event)
+        (uploadClicked) = onFileComplete($event)
+      >
+
+      </mat-file-upload>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center my-2">
+      <button mat-button  (click)="onSubmit()" class="yellow-button w-50 mx-1">
+        Add Field
+      </button>
+    </div>
+  </div>
+</div>
