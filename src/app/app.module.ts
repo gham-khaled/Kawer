@@ -19,7 +19,7 @@ Amplify.configure({
     endpoints: [
       {
         name: 'kawer-api',
-        endpoint:'https://qpzhs7vl32.execute-api.us-east-1.amazonaws.com/prod',
+        endpoint:'https://ua84sa3gl7.execute-api.us-east-1.amazonaws.com/prod',
         // custom_header: async () => {
         //   return {Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}`}
         // }
@@ -28,9 +28,9 @@ Amplify.configure({
   },
   Auth: {
     region: 'us-east-1',
-    userPoolId: 'us-east-1_Los2l1hzH',
+    userPoolId: 'us-east-1_nuwNGMUif',
     identityPoolId: 'us-east-1:5a0fae7d-0072-416d-8b8e-85f2f6b16155',
-    userPoolWebClientId: '25fi6rardjeeqqlpj0fqeet9fp'
+    userPoolWebClientId: '51acp0ec829t6c2a5q28njovja'
   }
 });
 
@@ -60,7 +60,7 @@ Amplify.configure({
   ],
 
   providers: [
-    {provide: LOCALE_ID, useValue: 'en-US'},
+    {provide: LOCALE_ID, useValue: 'en-GB'},
   ],
 
   bootstrap: [AppComponent]

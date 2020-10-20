@@ -9,8 +9,9 @@ import {Field} from "../field.model";
   styleUrls: ['./field-detail.component.css']
 })
 export class FieldDetailComponent implements OnInit {
-  id: number;
   field: Field
+  images_list: [string]
+  isLoading: boolean = true
 
   constructor(private fieldsService: FieldsService,
               private route: ActivatedRoute,
@@ -19,10 +20,13 @@ export class FieldDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.id = +params['id'];
-          this.field = this.fieldsService.getFieldById(this.id);
+      .subscribe((params: Params) => {
+          console.log(params);
+          this.fieldsService.getFieldByName(params['id']).then(field => {
+            this.field = field
+            this.images_list = [this.field.main_image]
+            this.isLoading = false
+          })
         }
       );
 

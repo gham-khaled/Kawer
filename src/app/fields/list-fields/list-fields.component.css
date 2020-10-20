@@ -20,7 +20,9 @@ agm-map {
 .input::placeholder {
   color: #828282;
 }
-
+img{
+  border-radius: 20px;
+}
 #location {
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;

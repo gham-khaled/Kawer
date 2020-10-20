@@ -7,22 +7,35 @@
     <ul class="navbar-nav mx-auto ">
       <li class="nav-item active">
         <button mat-button>
-          <a class="nav-link" routerLinkActive="active" routerLink=" ">Home </a>
+          <a class="nav-link"  [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" routerLink="">
+            Home
+          </a>
         </button>
       </li>
       <li class="nav-item">
         <button mat-button>
-          <a class="nav-link" routerLinkActive="active" routerLink="/fields">Fields</a>
+          <a class="nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" routerLink="/fields">
+            Fields
+          </a>
+        </button>
+      </li>
+      <li *ngIf="this.userService.getPermission('owner')"  class="nav-item">
+        <button mat-button>
+          <a class="nav-link" routerLinkActive="active" routerLink="/fields/add">
+            Add Field
+          </a>
         </button>
       </li>
       <li class="nav-item ">
         <button mat-button>
-          <a class="nav-link " routerLinkActive="active" routerLink="/contact">Contact</a>
+          <a class="nav-link " routerLinkActive="active" routerLink="/contact">
+            Contact
+          </a>
         </button>
       </li>
 
     </ul>
-    <ul *ngIf="!isLoggedIn" class="navbar-nav">
+    <ul *ngIf="!this.userService.getPermission('user')" class="navbar-nav">
       <li class="nav-item ">
         <button mat-button (click)="onLogin()">
           <div class="nav-link">Login</div>
@@ -34,7 +47,7 @@
         </button>
       </li>
     </ul>
-    <ul *ngIf="isLoggedIn" class="navbar-nav">
+    <ul *ngIf="this.userService.getPermission('user')" class="navbar-nav">
 
       <li class="nav-item pl-lg-4 pr-2">
         <button mat-button id="signUp" (click)="onSignOut()">
@@ -49,28 +62,33 @@
   <mat-sidenav [(opened)]="collapse" mode="over" #sidenav>
     <mat-nav-list>
 
-      <a mat-list-item  routerLink="" (click)="sidenav.close()">
+      <a mat-list-item routerLink="" (click)="sidenav.close()">
         <mat-icon>home</mat-icon>
         Home
       </a>
 
-      <a mat-list-item  routerLink="/fields" (click)="sidenav.close()">
+      <a mat-list-item routerLink="/fields" (click)="sidenav.close()">
         <mat-icon>sports_soccer</mat-icon>
         Fields
       </a>
-      <a mat-list-item  routerLink="/contact" (click)="sidenav.close()">
+      <a *ngIf="this.userService.getPermission('owner')" mat-list-item routerLink="/fields/add"
+         (click)="sidenav.close()">
+        <mat-icon>add_circle</mat-icon>
+        Add Field
+      </a>
+      <a mat-list-item routerLink="/contact" (click)="sidenav.close()">
         <mat-icon>contact_page</mat-icon>
         Contact
       </a>
-      <a *ngIf="!isLoggedIn" mat-list-item (click)="onLogin()">
+      <a *ngIf="!this.userService.getPermission('user')" mat-list-item (click)="onLogin()">
         <mat-icon>login</mat-icon>
         Login
       </a>
-      <a *ngIf="!isLoggedIn" mat-list-item (click)="onSignUp()">
+      <a *ngIf="!this.userService.getPermission('user')" mat-list-item (click)="onSignUp()">
         <mat-icon>person_add_alt</mat-icon>
         Sign Up
       </a>
-      <a *ngIf="isLoggedIn" mat-list-item (click)="onSignOut()">
+      <a *ngIf="this.userService.getPermission('user')" mat-list-item (click)="onSignOut()">
         <mat-icon>person_add_alt</mat-icon>
         Sign Out
       </a>

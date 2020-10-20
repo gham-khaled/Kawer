@@ -15,20 +15,14 @@ import {User} from "../user/user.model";
 export class NavbarComponent implements OnInit,OnDestroy {
   collapse = false
   userSub: Subscription;
-  isLoggedIn: boolean = false;
-  isOwner: boolean = false
-  constructor(private dialog: MatDialog, private userService: UserService) {
+  user: User;
+  constructor(private dialog: MatDialog, public userService: UserService) {
   }
 
   ngOnInit() {
-    this.userSub = this.userService.user.subscribe( user => {
-      console.log("Checking If user connected ")
-      this.isLoggedIn = !!user ;
-      this.isOwner = user.group.includes("owner")
-      console.log("Is Owner ?", this.isOwner)
-    });
-    console.log(this.isLoggedIn);
+    this.userSub = this.userService.user.subscribe(user => this.user = user)
   }
+
   ngOnDestroy() {
     this.userSub.unsubscribe()
   }

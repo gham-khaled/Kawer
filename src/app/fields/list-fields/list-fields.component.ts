@@ -5,6 +5,8 @@ import {Field} from "../field.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {debounceTime} from 'rxjs/operators';
 import {API} from 'aws-amplify';
+import {Subscription} from "rxjs";
+import {stringify} from "querystring";
 
 @Component({
   selector: 'app-list-fields',
@@ -15,35 +17,16 @@ import {API} from 'aws-amplify';
 
 export class ListFieldsComponent implements OnInit {
   // google maps zoom level
-  zoom: number = 12;
-
+  zoom: number = 14;
+  previousMarker = null
   // initial center position for the map
-  lat: number = 51.673858;
-  lng: number = 7.815982;
-  markers: marker[] = [
-    {
-      lat: 51.673858,
-      lng: 7.815982,
-      label: '90',
-      draggable: false
-    },
-    {
-      lat: 51.373858,
-      lng: 7.215982,
-      label: 'B',
-      draggable: false
-    },
-    {
-      lat: 51.723858,
-      lng: 7.895982,
-      label: 'C',
-      draggable: true
-    }
-  ]
-  queryStringParameters = {}
+  lat: number = 36.8392529;
+  lng: number = 10.1517748;
+  markers: marker[]
+  isLoading: boolean = true
   hours = []
   fields: Field[]
-
+  fieldSubscription: Subscription
 
   constructor(private fieldsService: FieldsService, private formBuilder: FormBuilder) {
   }
@@ -59,15 +42,31 @@ export class ListFieldsComponent implements OnInit {
     for (let i = 9; i < 22; i++) {
       this.hours.push(i)
     }
-    this.fields = this.fieldsService.getFields()
-    this.queryStringParameters = {...this.formInput.value}
-    console.log(this.queryStringParameters);
+
+    this.fieldSubscription = this.fieldsService.fieldsChanged.subscribe(fields => {
+      this.fields = fields
+      this.markers = this.fields.map(field => {
+        return {
+          lat: field.latitude,
+          lng: field.longitude,
+          name: field.name,
+          image: field.main_image,
+          label: field.price.toString(),
+          draggable: false
+        }
+      })
+      this.isLoading = false
+    })
+
+
     Object.keys(this.formInput.controls).forEach(key => {
       this.formInput.get(key).valueChanges.pipe(debounceTime(800)).subscribe(async value => {
-        console.log(value);
-        await this.fieldsService.fetchData(this.formInput.value)
+        const queryString = {...this.formInput.value, date: this.formInput.controls["date"].value.toString()}
+        await this.fieldsService.fetchFields(queryString)
       });
     })
+    this.fieldsService.fetchFields({}).then(x => console.log("Fetched Data"))
+
   }
 
   myFilter = (d: Date | null): boolean => {
@@ -75,8 +74,11 @@ export class ListFieldsComponent implements OnInit {
     return day > new Date() || isToday(day)
   }
 
-  clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
+  clickedMarker(infoWindow) {
+    if (this.previousMarker) {
+      this.previousMarker.close();
+    }
+    this.previousMarker = infoWindow;
   }
 
 
@@ -92,9 +94,11 @@ export class ListFieldsComponent implements OnInit {
 }
 
 // just an interface for type safety.
-interface marker {
+class marker {
   lat: number;
   lng: number;
-  label?: string;
+  label: string;
+  image: string;
+  name: string;
   draggable: boolean;
 }

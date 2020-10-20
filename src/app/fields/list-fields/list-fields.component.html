@@ -1,13 +1,13 @@
-<form [formGroup]="formInput" >
+<form [formGroup]="formInput">
 
-<div class="row  mt-sm-5 mt-3">
-  <!-- ----------------------------------------------FILTERS--------------------------------------------------------->
+  <div class="row  mt-sm-5 mt-3">
+    <!-- ----------------------------------------------FILTERS--------------------------------------------------------->
 
     <div class="col-12 col-sm-3 p-sm-0 my-2">
-      <input type="text"  class="input light-gray-text"
+      <input type="text" class="input light-gray-text"
              placeholder="Select a location"
 
-              id="location">
+             id="location">
     </div>
 
     <div class="col-12 col-sm-3 p-sm-0 my-2">
@@ -28,69 +28,76 @@
       </mat-select>
       <mat-datepicker color="#F4CE11" #picker></mat-datepicker>
     </div>
-</div>
+  </div>
 </form>
 
 <div class="row">
-<!-- ----------------------------------------------MAP--------------------------------------------------------->
-<div class="col-12">
-  <agm-map
-    [latitude]="lat"
-    [longitude]="lng"
-    [zoom]="zoom"
-    [disableDefaultUI]="false">
+  <!-- ----------------------------------------------MAP--------------------------------------------------------->
+  <div class="col-12">
+    <agm-map
+      [latitude]="lat"
+      [longitude]="lng"
+      [zoom]="zoom"
+      [disableDefaultUI]="false">
 
-    <agm-marker
-      *ngFor="let m of markers; let i = index"
-      (markerClick)="clickedMarker(m.label, i)"
-      [latitude]="m.lat"
-      [longitude]="m.lng"
-      [label]="m.label"
-      [markerDraggable]="m.draggable"
-      (dragEnd)="markerDragEnd(m, $event)">
+      <agm-marker
+        *ngFor="let m of markers; let i = index"
+        (markerClick)="clickedMarker(infoWindow)"
+        [latitude]="m.lat"
+        [longitude]="m.lng"
+        [label]="m.label "
+        [markerDraggable]="m.draggable"
+        (dragEnd)="markerDragEnd(m, $event)">
 
-      <agm-info-window>
-        <strong>InfoWindow content</strong>
-      </agm-info-window>
+        <agm-info-window #infoWindow>
+          <a routerLink="{{m.name}}">
 
-    </agm-marker>
+            <h1 class="title">{{m.name}}</h1>
+            <img src="{{m.image}}" alt="" style="max-height: 25vh; max-width: 25vh">
+          </a>
+        </agm-info-window>
 
-    <agm-circle [latitude]="lat + 0.3" [longitude]="lng"
-                [radius]="5000"
-                [fillColor]="'red'"
-                [circleDraggable]="false"
-                [editable]="true">
-    </agm-circle>
+      </agm-marker>
 
-  </agm-map>
+    </agm-map>
 
-</div>
-
-<!-- ----------------------------------------------FIELDS LIST--------------------------------------------------------->
-
-<div class="my-sm-5 my-3 title col-12 d-sm-inline-block d-flex justify-content-center">
-  Available Staduims
-</div>
-<div *ngFor="let field of fields" class="col-12 row mt-3 mb-5 mr-sm-3 ml-1 ml-md-n3">
-  <div class="col-sm-5  col-12  mr-sm-0  mb-3 d-sm-block d-flex justify-content-center">
-    <a routerLink="{{field.id}}">
-      <img src="{{field.imageThumbnailPath}}" alt="" class="img-fluid">
-    </a>
   </div>
-  <div class="col-sm-5 col-12   pl-sm-0  ">
-    <div class=" d-sm-inline-block d-flex justify-content-center">
-      <a routerLink="{{field.id}}" class="subtitle">{{field.name}}</a>
-    </div>
-    <div class="light-gray-text gray-region mt-1  d-sm-block d-flex justify-content-center ">
-      {{field.region}}
-    </div>
-    <div class="light-gray-text gray-region description mt-1  pt-3  d-sm-block d-none">
-      {{field.description}}
-    </div>
-    <div class="title price pt-4  d-sm-block d-flex justify-content-center ">
-      ${{field.fees}} USD
-    </div>
+
+  <!-- ----------------------------------------------FIELDS LIST--------------------------------------------------------->
+  <div class="my-sm-5 my-3 title col-12 d-sm-inline-block d-flex justify-content-center">
+    Available Staduims
   </div>
-</div>
+  <div class="wrapper col-12 py-5" *ngIf="isLoading">
+    <mat-progress-spinner
+      mode="indeterminate"
+      class="mx-auto mt-5 pt-5 align-content-center ">
+    </mat-progress-spinner>
+  </div>
+  <div *ngIf="!isLoading">
+
+    <div *ngFor="let field of fields" class="col-12 row mt-3 mb-5 mr-sm-3 ml-1 ml-md-n3">
+      <div class="col-sm-5  col-12  mr-sm-0  mb-3 d-sm-block d-flex justify-content-center">
+        <a routerLink="{{field.name}}">
+          <img src="{{field.main_image}}" alt="" class="img-fluid">
+        </a>
+      </div>
+      <div class="col-sm-5 col-12   pl-sm-0  ">
+        <div class=" d-sm-inline-block d-flex justify-content-center">
+          <a routerLink="{{field.name}}" class="subtitle">{{field.name}}</a>
+        </div>
+        <div class="light-gray-text gray-region mt-1  d-sm-block d-flex justify-content-center ">
+          {{field.number_players}} Players
+        </div>
+        <div class="light-gray-text gray-region description mt-1  pt-3  d-sm-block d-none">
+          {{field.description}}
+        </div>
+        <div class="title price pt-4  d-sm-block d-flex justify-content-center ">
+          ${{field.price}} USD
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 
 </div>

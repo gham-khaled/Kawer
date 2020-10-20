@@ -1,19 +1,20 @@
 import {Injectable} from "@angular/core";
 import {Auth} from 'aws-amplify';
-import {Subject} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
 import {User} from "./user.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  user = new Subject<User>()
+  user = new BehaviorSubject<User>(null)
   session = null
 
   constructor() {
     Auth.currentAuthenticatedUser()
       .then(user => {
         this.user.next(this._createUser(user))
+        console.log(user);
       })
       .catch(error => console.log("Not Authenticated"))
   }
@@ -56,9 +57,14 @@ export class UserService {
     await Auth.resendSignUp(username);
   }
 
+  getPermission (group: string) {
+
+    return this.user.getValue() && this.user.getValue().group.includes(group)
+  }
   private _createUser(user) {
     const groups = user.signInUserSession.accessToken.payload["cognito:groups"]
     const {name, family_name, birthdate, email, picture} = user.attributes
     return new User(name, family_name, email, picture, birthdate, groups)
   }
+
 }

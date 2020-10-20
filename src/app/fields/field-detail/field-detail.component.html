@@ -1,8 +1,15 @@
-<div class="row">
+<div class="wrapper" *ngIf="isLoading" style="height: 75vh">
+  <mat-progress-spinner
+    mode="indeterminate"
+    class="mx-auto mt-5 pt-5 align-content-center "
+  >
+  </mat-progress-spinner>
+</div>
+<div *ngIf="!isLoading" class="row">
   <div class="col-12 mt-md-5 mt-3">
     <div class="d-flex flex-column justify-content-start">
       <div class="title">{{field.name}}</div>
-      <div class="light-gray-text">{{field.region}}</div>
+      <div class="light-gray-text">{{field.number_players}} Players</div>
       <div class="align-self-end mt-md-n5 d-none d-md-block">
         <ul class="social-icons">
           <li><a class="facebook" href="#"><img src="../../../assets/images/footer/Facebook.png" alt=""></a></li>
@@ -14,7 +21,7 @@
     </div>
   </div>
   <div class="col-12 mt-md-5 mt-3 ">
-    <carousel [slides]=field.imagesPath></carousel>
+    <carousel [slides]=images_list></carousel>
   </div>
   <div class="col-12 col-sm-4 mt-sm-5 mt-3">
     <div class="title">Amenities</div>
@@ -33,8 +40,27 @@
   <hr class="col-12 mt-4">
   <div class="title mt-4 col-12">Pick a time</div>
   <div class="col-12 ">
-    <app-scheduler [fee]="field.fees"></app-scheduler>
+    <app-scheduler [fee]="field.price"></app-scheduler>
   </div>
+  <div class="col-12">
+    <div class="title col-12">Location</div>
+    <div class="col-12 mt-3 mb-5" >
+      <agm-map
+        [latitude]="field.latitude"
+        [longitude]="field.longitude"
+        [zoom]="17"
+        [disableDefaultUI]="false">
 
+        <agm-marker
+          [latitude]="field.latitude"
+          [longitude]="field.longitude"
+          [label]="field.name "
+          [markerDraggable]="false">
+        </agm-marker>
+
+      </agm-map>
+
+    </div>
+  </div>
 
 </div>

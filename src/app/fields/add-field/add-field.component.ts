@@ -76,6 +76,7 @@ export class AddFieldComponent implements OnInit {
     this.formField.controls["amenities"].setValue(selected_amenities.map(x => x.name))
     this.formField.controls["longitude"].setValue(this.long)
     this.formField.controls["latitude"].setValue(this.lat)
+    console.log(this.formField.controls["amenities"].value)
     let body = this.formField.value
     body = {
       ...body,
@@ -92,16 +93,15 @@ export class AddFieldComponent implements OnInit {
       // @ts-ignore
       formData.append(key, value);
     });
-    const url = "https://qpzhs7vl32.execute-api.us-east-1.amazonaws.com/prod/field"
+    const url = "https://ua84sa3gl7.execute-api.us-east-1.amazonaws.com/prod/field"
     try {
-      const response =  await axios.post(url, formData, {
+      const response = await axios.post(url, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
       console.log(response);
-    }
-    catch (e) {
+    } catch (e) {
       console.log(e.response);
     }
 

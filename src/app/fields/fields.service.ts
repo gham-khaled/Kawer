@@ -1,8 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Subject} from "rxjs";
 import {Field} from "./field.model";
-import {forEachComment} from "tslint";
-import {map, tap} from "rxjs/operators";
 import {API} from "aws-amplify";
 
 @Injectable({
@@ -18,20 +16,7 @@ export class FieldsService {
   ];
   description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ante quam nunc pharetra ut lacinia odio nunc. Sem risus aliquam id adipiscing. Condimentum dolor eget lacus, lacinia leo orci mauris pulvinar congue. Nisl est orci quam feugiat mi, eget tortor eget arcu.\n"
 
-  private fields = [
-    new Field(0, "Camp Nou Barcelona", "Barcelona, Spain", "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-      "assets/images/field-list/field-list-1.png", this.slides,
-      ['Wifi', 'Bar', 'Shower', 'Toilet'], 90),
-    new Field(1, "Santiago Bernabeu", "Madrid, Spain", this.description,
-      "assets/images/field-list/field-list-2.png", this.slides,
-      ['Wifi', 'Lockers', 'Shower', 'Toilet', 'Artificial Turf'], 80),
-    new Field(2, "Chedly Zouetin", "Tunis, Tunisia", this.description,
-      "assets/images/field-list/field-list-3.png", this.slides,
-      ['Artificial Turf', 'Lockers', 'Shower', 'Toilet'], 20),
-    new Field(2, "Chedly Zouetin", "Tunis, Tunisia", this.description,
-      "assets/images/field-list/field-list-3.png", this.slides,
-      ['Artificial Turf', 'Lockers', 'Shower', 'Toilet'], 20)
-  ]
+  private fields = []
 
   constructor() {
   }
@@ -40,24 +25,41 @@ export class FieldsService {
     return this.fields.slice();
   }
 
-  getFieldById(id: number) {
-    for (let i = 0; i < this.fields.length; i++) {
-      if (this.fields[i].id === id) {
-        return this.fields[i]
-      }
-    }
+  async getFieldByName(name: string) {
+    const item = await API.get('kawer-api', `/field/${name}`, {})
+    console.log(item);
+    return new Field(item["name"],
+      item["latitude"],
+      item["longitude"],
+      item["description"],
+      item["main_image"],
+      item["reservation"],
+      item["number_players"],
+      item["amenities"],
+      item["price"])
+
+
   }
 
-  async fetchData(queryString) {
+  async fetchFields(queryString) {
     try {
       const items = await API.get('kawer-api', '/field', {
         'queryStringParameters': queryString
       })
-      console.log(items);
-    }
-    catch (e) {
+      const fields = items.map(item => new Field(item["name"],
+        item["latitude"],
+        item["longitude"],
+        item["description"],
+        item["main_image"],
+        item["reservation"],
+        item["number_players"],
+        item["amenities"],
+        item["price"]
+      ))
+      this.fieldsChanged.next(fields)
+    } catch (e) {
       console.log(e);
     }
-
   }
+
 }
