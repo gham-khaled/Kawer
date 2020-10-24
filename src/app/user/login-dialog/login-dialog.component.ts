@@ -8,7 +8,7 @@ import {a} from "@aws-amplify/ui";
 @Component({
   selector: 'app-login-dialog',
   templateUrl: './login-dialog.component.html',
-  styleUrls: ['../sign-in-dialog/sign-up-dialog.component.css', './login-dialog.component.css'],
+  styleUrls: ['../sign-in-dialog/sign-up-dialog.component.scss', './login-dialog.component.scss'],
 
 })
 export class LoginDialogComponent implements OnInit {

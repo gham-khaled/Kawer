@@ -11,6 +11,7 @@
   background-repeat: no-repeat !important;
 
 }
+
 .d-flex.justify-content-center {
   position: relative;
   top: 15%;
@@ -21,6 +22,7 @@
   font-size: 80px;
   line-height: 120px;
 }
+
 .wrapper {
   position: relative;
   top: 70%;
@@ -34,6 +36,7 @@
   padding: 30px 60px;
 
 }
+
 /* ######################################### INPUT ###################################################### */
 
 .input {
@@ -52,17 +55,16 @@
 
 }
 
+
 .input::placeholder {
   color: #828282;
 }
 
-#location {
-  border-bottom-left-radius: 10px;
-  border-top-left-radius: 10px;
-  background-image: url("../../assets/images/icons/pin.jpg");
-}
 
 #date {
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+
   background-image: url("../../assets/images/icons/calendar.png");
 }
 
@@ -73,6 +75,7 @@
   color: white;
   background-image: url("../../assets/images/icons/search.png");
   background-color: #F4CE11;
+  text-align: left;
 }
 
 #staduim::placeholder {
@@ -91,6 +94,28 @@ input[type="text"]:focus,
   text-align: start;
 }
 
+.select {
+  padding: 12px 8px 12px 20px;
+  border: none;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-right: 1px solid #ccc;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.15);
+  background-image: url("../../assets/images/icons/clock.svg");
+  background-color: #FFFFFF;
+  background-position: 90% 50%;
+  background-repeat: no-repeat;
+  background-size: 8%;
+}
+
+:host::ng-deep .mat-select-placeholder {
+  margin: 0px 10px;
+  font-size: 18px;
+  line-height: 26px;
+  color: #828282;
+}
+
 /* ######################################### CARD ###################################################### */
 
 .card {
@@ -104,10 +129,12 @@ input[type="text"]:focus,
 .card-title {
   font-size: 19px;
 }
+
 .card-text.light-gray-text {
   font-size: 16px;
   line-height: 19px;
 }
+
 /* ######################################### NewsLetter ###################################################### */
 
 #newsletter {
@@ -115,18 +142,21 @@ input[type="text"]:focus,
   padding: 7% 5%;
 
 }
-#newsletter  input {
+
+#newsletter input {
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
 }
+
 #newsletter button {
   background: #F4CE11;
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
   color: #FFFFFF;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.15);
-  padding: 0px  30px;
+  padding: 0px 30px;
 }
+
 /* ######################################### RESPONSIVE ###################################################### */
 
 @media all and (max-width: 769px) {
@@ -145,22 +175,38 @@ input[type="text"]:focus,
     padding: 10px 10px;
   }
 
-  .input {
+  .input, .select {
     text-indent: 0;
     font-size: 14px;
     padding: 15px 5px 15px 7px;
     background-size: 7%;
     border-radius: 10px;
+    margin-left: 5px;
   }
-  #newsletter  .justify-content-center {
+
+  :host::ng-deep .mat-select-placeholder {
+    margin-left: 0px;
+    font-size: 14px;
+    line-height: 26px;
+    color: #828282;
+  }
+
+  .select {
+    padding: 10px 5px 10px 7px;
+
+  }
+
+  #newsletter .justify-content-center {
     display: flex;
     padding: 10% 0;
   }
 
 }
+
 @media screen and (max-width: 480px) {
   .popular {
     margin-top: 7rem;
   }
 }
+
 

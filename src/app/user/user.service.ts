@@ -1,22 +1,19 @@
 import {Injectable} from "@angular/core";
-import {Auth} from 'aws-amplify';
+import {API, Auth} from 'aws-amplify';
 import {BehaviorSubject, Subject} from "rxjs";
 import {User} from "./user.model";
+import axios from "axios";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  user = new BehaviorSubject<User>(null)
+  private user: User = null
   session = null
+  private default_picture = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
 
   constructor() {
-    Auth.currentAuthenticatedUser()
-      .then(user => {
-        this.user.next(this._createUser(user))
-        console.log(user);
-      })
-      .catch(error => console.log("Not Authenticated"))
+    this._initializeUser(false)
   }
 
 
@@ -26,15 +23,16 @@ export class UserService {
 
   async login(username: string, password: string) {
     const newUser = await Auth.signIn(username, password)
-    this.user.next(this._createUser(newUser))
+    this.user = this._createUser(newUser)
   }
 
   async signOut() {
     await Auth.signOut()
-    this.user.next(null)
+    this.user = null
   }
 
   async signUp(username: string, password: string, email: string, name: string, family_name: string, birthdate: string) {
+    const picture = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
     const {user} = await Auth.signUp({
       username,
       password,
@@ -42,11 +40,33 @@ export class UserService {
         name,
         family_name,
         birthdate,
-        email
+        email,
+        picture
       }
     });
     console.log(user);
 
+  }
+
+  async addPicture(formData: FormData) {
+    const url = "https://ua84sa3gl7.execute-api.us-east-1.amazonaws.com/prod/user"
+    try {
+      const response = await axios.post(url, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      let user = await Auth.currentAuthenticatedUser();
+
+      const result = await Auth.updateUserAttributes(user, {
+        'picture': response.data
+      });
+      this._initializeUser(true)
+      this.user.picture = response.data
+      return result
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   async sendCode(username: string, code) {
@@ -57,14 +77,33 @@ export class UserService {
     await Auth.resendSignUp(username);
   }
 
-  getPermission (group: string) {
-
-    return this.user.getValue() && this.user.getValue().group.includes(group)
+  getPermission(group: string) {
+    return this.user && this.user.group.includes(group)
   }
+
+
+  getUserAttribute(attribute) {
+    return this.user ? this.user[attribute] : null
+
+  }
+
+  getUser() {
+    return this.user
+  }
+
   private _createUser(user) {
     const groups = user.signInUserSession.accessToken.payload["cognito:groups"]
-    const {name, family_name, birthdate, email, picture} = user.attributes
+    let {name, family_name, birthdate, email, picture} = user.attributes
     return new User(name, family_name, email, picture, birthdate, groups)
   }
 
+  private _initializeUser(cache: boolean) {
+    Auth.currentAuthenticatedUser({
+      bypassCache: cache  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+    })
+      .then(user => {
+        this.user = this._createUser(user)
+      })
+      .catch(error => console.log("Not Authenticated"))
+  }
 }

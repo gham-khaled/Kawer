@@ -22,6 +22,8 @@ agm-map {
 }
 img{
   border-radius: 20px;
+  height: 100%;
+  width: 100%;
 }
 #location {
   border-bottom-left-radius: 10px;
@@ -34,6 +36,8 @@ img{
 }
 
 #players {
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
   background-image: url("../../../assets/images/icons/soccer.png");
   background-position: 90% 50%;
 }
@@ -99,12 +103,10 @@ input:focus {
 }
 
 @media all and (max-width: 769px) {
-  .input {
+  .input, .select {
     border-radius: 10px;
   }
 
-  .select {
 
-  }
 
 }

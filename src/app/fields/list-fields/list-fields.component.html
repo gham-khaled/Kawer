@@ -1,26 +1,19 @@
 <form [formGroup]="formInput">
 
-  <div class="row  mt-sm-5 mt-3">
+  <div class="row  mt-sm-5 mt-3 mx-0 mx-sm-4">
     <!-- ----------------------------------------------FILTERS--------------------------------------------------------->
 
-    <div class="col-12 col-sm-3 p-sm-0 my-2">
-      <input type="text" class="input light-gray-text"
-             placeholder="Select a location"
-
-             id="location">
-    </div>
-
-    <div class="col-12 col-sm-3 p-sm-0 my-2">
+    <div class="col-12 col-sm-4 p-sm-0 my-2">
       <input type="number" class="input light-gray-text" placeholder="Select a number " formControlName="number"
              id="players" min="3" max="8">
     </div>
 
-    <div class="col-12 col-sm-3 p-sm-0 my-2">
+    <div class="col-12 col-sm-4 p-sm-0 my-2">
       <input type="text" (click)="picker.open()" [matDatepicker]="picker" [matDatepickerFilter]="myFilter"
              formControlName="date" class="input light-gray-text" placeholder="Select a date" id="date">
     </div>
 
-    <div class="col-11 ml-sm-0 ml-3 col-sm-3 p-sm-0  my-2  select d-flex align-items-center">
+    <div class="col-11 ml-sm-0 ml-3 col-sm-4 p-sm-0  my-2  select d-flex align-items-center">
       <mat-select formControlName="hour" placeholder="Select an hour">
         <mat-option *ngFor="let hour of hours" [value]="hour">
           {{hour}}
@@ -74,30 +67,31 @@
     </mat-progress-spinner>
   </div>
   <div *ngIf="!isLoading">
+    <app-field-card *ngFor="let field of fields" [field]="field"></app-field-card>
 
-    <div *ngFor="let field of fields" class="col-12 row mt-3 mb-5 mr-sm-3 ml-1 ml-md-n3">
-      <div class="col-sm-5  col-12  mr-sm-0  mb-3 d-sm-block d-flex justify-content-center">
-        <a routerLink="{{field.name}}">
-          <img src="{{field.main_image}}" alt="" class="img-fluid">
-        </a>
-      </div>
-      <div class="col-sm-5 col-12   pl-sm-0  ">
-        <div class=" d-sm-inline-block d-flex justify-content-center">
-          <a routerLink="{{field.name}}" class="subtitle">{{field.name}}</a>
-        </div>
-        <div class="light-gray-text gray-region mt-1  d-sm-block d-flex justify-content-center ">
-          {{field.number_players}} Players
-        </div>
-        <div class="light-gray-text gray-region description mt-1  pt-3  d-sm-block d-none">
-          {{field.description}}
-        </div>
-        <div class="title price pt-4  d-sm-block d-flex justify-content-center ">
-          ${{field.price}} USD
-        </div>
-      </div>
+<!--    <div *ngFor="let field of fields" class="col-12 mt-3 mb-5 mr-sm-3 ml-1 ml-md-n3">-->
+<!--            <div class="col-sm-5  col-12  mr-sm-0  mb-3 d-sm-block d-flex justify-content-center">-->
+<!--              <a routerLink="{{field.name}}">-->
+<!--                <img src="{{field.main_image}}" alt="" class="img-fluid">-->
+<!--              </a>-->
+<!--            </div>-->
+<!--            <div class="col-sm-5 col-12 ml-sm-3  ml-0  pl-sm-0  ">-->
+<!--              <div class=" d-sm-inline-block d-flex justify-content-center">-->
+<!--                <a routerLink="{{field.name}}" class="subtitle">{{field.name}}</a>-->
+<!--              </div>-->
+<!--              <div class="light-gray-text gray-region mt-1  d-sm-block d-flex justify-content-center ">-->
+<!--                {{field.number_players}} Players-->
+<!--              </div>-->
+<!--              <div class="light-gray-text gray-region description   pt-3  d-sm-block d-none">-->
+<!--                {{field.description}}-->
+<!--              </div>-->
+<!--              <div class="title price pt-2  d-sm-block d-flex justify-content-center ">-->
+<!--                ${{field.price}} USD-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
     </div>
 
+
   </div>
-
-
-</div>

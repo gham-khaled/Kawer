@@ -4,7 +4,7 @@ import { trigger, transition, style, animate } from "@angular/animations";
 @Component({
   selector: 'carousel',
   templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.css'],
+  styleUrls: ['./carousel.component.scss'],
   animations: [
     trigger('carouselAnimation', [
       transition('void => *', [

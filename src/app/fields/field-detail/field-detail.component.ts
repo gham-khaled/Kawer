@@ -6,7 +6,7 @@ import {Field} from "../field.model";
 @Component({
   selector: 'app-field-detail',
   templateUrl: './field-detail.component.html',
-  styleUrls: ['./field-detail.component.css']
+  styleUrls: ['./field-detail.component.scss']
 })
 export class FieldDetailComponent implements OnInit {
   field: Field

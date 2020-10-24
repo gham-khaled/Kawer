@@ -1,0 +1,23 @@
+
+<div  class="row col-12 mt-3 mb-5 mr-sm-3 ml-1 ml-md-n3">
+   <div class="col-sm-5  col-12  mr-sm-0  mb-3 d-sm-block d-flex justify-content-center">
+     <a routerLink="{{field.name}}">
+       <img src="{{field.main_image}}" alt="" class="img-fluid">
+     </a>
+   </div>
+   <div class="col-sm-5 col-12 ml-sm-3  ml-0  pl-sm-0  ">
+     <div class=" d-sm-inline-block d-flex justify-content-center">
+       <a routerLink="{{field.name}}" class="subtitle">{{field.name}}</a>
+     </div>
+     <div class="light-gray-text gray-region mt-1  d-sm-block d-flex justify-content-center ">
+       {{field.number_players}} Players
+     </div>
+     <div class="light-gray-text gray-region description   pt-3  d-sm-block d-none">
+       {{field.description}}
+     </div>
+     <div class="title price pt-2  d-sm-block d-flex justify-content-center ">
+       ${{field.price}} USD
+     </div>
+   </div>
+
+ </div>

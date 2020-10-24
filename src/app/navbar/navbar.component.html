@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light ">
+<nav class="navbar navbar-expand-lg navbar-light "
+     [ngClass]="{'navbar-white': !profileURL , 'navbar-yellow':profileURL }">
   <img class="navbar-brand" src="assets/images/navbar/logo.png">
   <button class="navbar-toggler" type="button" (click)="collapse = !collapse">
     <span class="navbar-toggler-icon"></span>
@@ -47,12 +48,18 @@
         </button>
       </li>
     </ul>
-    <ul *ngIf="this.userService.getPermission('user')" class="navbar-nav">
 
-      <li class="nav-item pl-lg-4 pr-2">
-        <button mat-button id="signUp" (click)="onSignOut()">
-          <div class="nav-link">Sign Out</div>
-        </button>
+
+
+    <ul *ngIf="this.userService.getPermission('user')" class="navbar-nav">
+      <li class="nav-item dropdown px-4 mr-5" [ngClass]="dropdown ? 'show' : ''">
+        <a class="nav-link dropdown-toggle" (click)="dropdown = !dropdown" (clickOutside)="dropdown = false">
+          <img src="{{this.userService.getUserAttribute('picture')}}" alt="" class="avatar-thumbnail">
+        </a>
+        <div class="dropdown-menu " [ngClass]="dropdown ? 'show' : ''">
+          <a class="dropdown-item" routerLink="/profile" >Profile</a>
+          <a class="dropdown-item"(click)="onSignOut()" >Sign out</a>
+        </div>
       </li>
     </ul>
 
@@ -88,8 +95,12 @@
         <mat-icon>person_add_alt</mat-icon>
         Sign Up
       </a>
+      <a *ngIf="this.userService.getPermission('user')" mat-list-item routerLink="/profile" (click)="sidenav.close()">
+        <mat-icon>person</mat-icon>
+        Profile
+      </a>
       <a *ngIf="this.userService.getPermission('user')" mat-list-item (click)="onSignOut()">
-        <mat-icon>person_add_alt</mat-icon>
+        <mat-icon>login</mat-icon>
         Sign Out
       </a>
 

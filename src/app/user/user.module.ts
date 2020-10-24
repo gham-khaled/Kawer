@@ -6,6 +6,7 @@ import {CommonModule} from "@angular/common";
 import {MatModule} from "../mat.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {AppRoutingModule} from "../app-routing.module";
+import {FieldsModule} from "../fields/fields.module";
 
 @NgModule({
   declarations: [
@@ -13,13 +14,14 @@ import {AppRoutingModule} from "../app-routing.module";
     SignUpDialogComponent,
     LoginDialogComponent,
   ],
-  imports: [
-    CommonModule,
-    MatModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
+    imports: [
+        CommonModule,
+        MatModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        FieldsModule,
 
-  ],
+    ],
   exports: [
     ProfileComponent,
     SignUpDialogComponent,

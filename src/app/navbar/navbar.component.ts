@@ -1,31 +1,32 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {animate, state, style, transition, trigger} from "@angular/animations";
 import {MatDialog} from "@angular/material/dialog";
 import {SignUpDialogComponent} from "../user/sign-in-dialog/sign-up-dialog.component";
 import {LoginDialogComponent} from "../user/login-dialog/login-dialog.component";
 import {UserService} from "../user/user.service";
-import {Subscription} from "rxjs";
-import {User} from "../user/user.model";
+import {NavigationStart, Router} from "@angular/router";
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.scss'],
+
 })
-export class NavbarComponent implements OnInit,OnDestroy {
+export class NavbarComponent implements OnInit {
   collapse = false
-  userSub: Subscription;
-  user: User;
-  constructor(private dialog: MatDialog, public userService: UserService) {
+  dropdown = false
+  profileURL : boolean
+
+  constructor(private dialog: MatDialog, public userService: UserService, private router: Router) {
   }
 
   ngOnInit() {
-    this.userSub = this.userService.user.subscribe(user => this.user = user)
+    this.router.events
+      .filter(event => event instanceof NavigationStart)
+      .subscribe(event => this.profileURL = event["url"] === "/profile")
+
   }
 
-  ngOnDestroy() {
-    this.userSub.unsubscribe()
-  }
 
   onLogin() {
     const dialogRef = this.dialog.open(LoginDialogComponent, {
@@ -44,7 +45,8 @@ export class NavbarComponent implements OnInit,OnDestroy {
       autoFocus: false
     })
   }
-  async onSignOut () {
+
+  async onSignOut() {
     await this.userService.signOut()
   }
 }

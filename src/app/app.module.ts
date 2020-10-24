@@ -12,27 +12,13 @@ import {AppRoutingModule} from "./app-routing.module";
 import {FieldsModule} from "./fields/fields.module";
 import {MatModule} from "./mat.module";
 import {UserModule} from "./user/user.module";
-import Amplify, { API } from 'aws-amplify';
+import Amplify from 'aws-amplify';
+import {ReactiveFormsModule} from "@angular/forms";
+import {ClickOutsideModule} from "ng-click-outside";
 
-Amplify.configure({
-  API: {
-    endpoints: [
-      {
-        name: 'kawer-api',
-        endpoint:'https://ua84sa3gl7.execute-api.us-east-1.amazonaws.com/prod',
-        // custom_header: async () => {
-        //   return {Authorization: `Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}`}
-        // }
-      },
-    ],
-  },
-  Auth: {
-    region: 'us-east-1',
-    userPoolId: 'us-east-1_nuwNGMUif',
-    identityPoolId: 'us-east-1:5a0fae7d-0072-416d-8b8e-85f2f6b16155',
-    userPoolWebClientId: '51acp0ec829t6c2a5q28njovja'
-  }
-});
+import aws_exports from "src/aws-exports";
+import { ContactComponent } from './contact/contact.component';
+Amplify.configure(aws_exports);
 
 
 @NgModule({
@@ -41,17 +27,20 @@ Amplify.configure({
     NavbarComponent,
     HomeComponent,
     FooterComponent,
+    ContactComponent,
 
   ],
 
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatModule,
-    UserModule,
-    FieldsModule,
-  ],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatModule,
+        UserModule,
+        FieldsModule,
+        ReactiveFormsModule,
+        ClickOutsideModule
+    ],
 
   entryComponents: [
     ConfirmDialogComponent,

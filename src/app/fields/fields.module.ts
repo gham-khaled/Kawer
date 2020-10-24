@@ -15,6 +15,7 @@ import {MatModule} from "../mat.module";
 import { AddFieldComponent } from './add-field/add-field.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFileUploadModule} from "mat-file-upload";
+import { FieldCardComponent } from './field-card/field-card.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {MatFileUploadModule} from "mat-file-upload";
     CarouselComponent,
     SchedulerComponent,
     ConfirmDialogComponent,
-    AddFieldComponent
+    AddFieldComponent,
+    FieldCardComponent
   ],
   imports: [
     RouterModule,
@@ -41,14 +43,15 @@ import {MatFileUploadModule} from "mat-file-upload";
     ReactiveFormsModule,
     FormsModule
   ],
-  exports: [
-    FieldsComponent,
-    ListFieldsComponent,
-    FieldDetailComponent,
-    CarouselComponent,
-    SchedulerComponent,
-    ConfirmDialogComponent
-  ]
+    exports: [
+        FieldsComponent,
+        ListFieldsComponent,
+        FieldDetailComponent,
+        CarouselComponent,
+        SchedulerComponent,
+        ConfirmDialogComponent,
+        FieldCardComponent
+    ]
 
 })
 export class FieldsModule {

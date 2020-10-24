@@ -7,6 +7,7 @@ import {FieldDetailComponent} from "./fields/field-detail/field-detail.component
 import {ProfileComponent} from "./profile/profile.component";
 import {LoginDialogComponent} from "./user/login-dialog/login-dialog.component";
 import {AddFieldComponent} from "./fields/add-field/add-field.component";
+import {ContactComponent} from "./contact/contact.component";
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent
+  },
+  {
+    path: 'contact',
+    component: ContactComponent
   },
   {
     path: '**',

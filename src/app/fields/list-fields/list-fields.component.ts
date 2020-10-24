@@ -7,11 +7,12 @@ import {debounceTime} from 'rxjs/operators';
 import {API} from 'aws-amplify';
 import {Subscription} from "rxjs";
 import {stringify} from "querystring";
+import {ActivatedRoute, Route} from "@angular/router";
 
 @Component({
   selector: 'app-list-fields',
   templateUrl: './list-fields.component.html',
-  styleUrls: ['./list-fields.component.css']
+  styleUrls: ['./list-fields.component.scss']
 })
 
 
@@ -28,7 +29,7 @@ export class ListFieldsComponent implements OnInit {
   fields: Field[]
   fieldSubscription: Subscription
 
-  constructor(private fieldsService: FieldsService, private formBuilder: FormBuilder) {
+  constructor(private fieldsService: FieldsService, private formBuilder: FormBuilder, private route: ActivatedRoute) {
   }
 
   formInput: FormGroup = this.formBuilder.group({
@@ -39,11 +40,16 @@ export class ListFieldsComponent implements OnInit {
   })
 
   ngOnInit(): void {
+    let initialQueryString = {}
     for (let i = 9; i < 22; i++) {
       this.hours.push(i)
     }
+    this.route.queryParams.subscribe(params => {
+      initialQueryString = params
+    });
 
     this.fieldSubscription = this.fieldsService.fieldsChanged.subscribe(fields => {
+
       this.fields = fields
       this.markers = this.fields.map(field => {
         return {
@@ -62,10 +68,11 @@ export class ListFieldsComponent implements OnInit {
     Object.keys(this.formInput.controls).forEach(key => {
       this.formInput.get(key).valueChanges.pipe(debounceTime(800)).subscribe(async value => {
         const queryString = {...this.formInput.value, date: this.formInput.controls["date"].value.toString()}
+        this.isLoading = true
         await this.fieldsService.fetchFields(queryString)
       });
     })
-    this.fieldsService.fetchFields({}).then(x => console.log("Fetched Data"))
+    this.fieldsService.fetchFields(initialQueryString).then(x => console.log("Fetched Data"))
 
   }
 

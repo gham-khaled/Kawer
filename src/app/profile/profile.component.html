@@ -1,22 +1,40 @@
-<div class="container-fluid   " >
+<div class="container-fluid   ">
   <div class="row ">
     <div class="col-12 yellow-image ">
     </div>
   </div>
   <div class="row profile-information">
     <div class="col-12 col-sm-3 profile-name pb-3">
-      <img src="assets/images/profile/profile-pic.png" class="profile-image" alt="">
-      <div class="name mt-4 ml-4">
-        Anna Smith
+      <div *ngIf="!isLoadingPicture">
+        <img src="{{user.picture}}" class="profile-image" alt="">
+        <div class="name my-4 ml-4">
+          {{user.name}} {{user.family_name}}
+        </div>
+        <mat-file-upload
+          class="edit-photo mb-5 "
+          [labelText]="''"
+          [selectButtonText]="'Edit Photo'"
+          [uploadButtonText]="'Submit'"
+          [allowMultipleFiles]="false"
+          [showUploadButton]="false"
+          [acceptedTypes]="'.png, .jpg, .jpeg'"
+          (selectedFilesChanged)=onFileComplete($event)
+          (uploadClicked)=onFileComplete($event)
+        >
+
+        </mat-file-upload>
       </div>
-      <a href="" class="edit-photo mb-5 " >
-        Edit Photo
-      </a>
+      <div class="wrapper col-12 py-5" *ngIf="isLoadingPicture">
+        <mat-progress-spinner
+          mode="indeterminate"
+          class="mx-auto mt-5 pt-5 align-content-center ">
+        </mat-progress-spinner>
+      </div>
       <div class="row mt-5 pt-5">
         <div class="col-6  icon">
           <img src="assets/images/profile/bookings.png" alt="">
           <div class="mt-3">
-            <a href="#"  style="color: black">
+            <a href="#" style="color: black">
               My Bookings
             </a>
           </div>
@@ -49,32 +67,20 @@
         </div>
       </div>
     </div>
-    <div class=" col-12 col-sm-9 title booking"  >
+    <div class=" col-12 col-sm-9 title booking">
       Bookings
       <div class="row mt-5">
         <div class="col-12">
-          <mat-tab-group   >
-            <mat-tab label="Current"  >
-              <div *ngFor="let field of fields" class="row mt-3 mb-5 mr-sm-3 ml-1 ml-md-n3 field " >
-                <div class="col-sm-5  col-12  mr-sm-0  mb-3 d-sm-block d-flex justify-content-center field-image">
-                  <a routerLink="{{field.id}}">
-                    <img src="{{field.imageThumbnailPath}}" alt="" class="img-fluid field-image">
-                  </a>
-                </div>
-                <div class="col-sm-5 col-12   pl-sm-0 field-text  ">
-                  <div class=" d-sm-inline-block d-flex justify-content-center">
-                    <a routerLink="{{field.id}}" class="subtitle">{{field.name}}</a>
-                  </div>
-                  <div class="light-gray-text gray-region mt-1  d-sm-block d-flex justify-content-center ">
-                    {{field.region}}
-                  </div>
-                  <div class="light-gray-text gray-region description mt-1  pt-3  d-sm-block d-none" >
-                    {{field.description}}
-                  </div>
-                  <div class="title price pt-4  d-sm-block d-flex justify-content-center ">
-                    ${{field.fees}} USD
-                  </div>
-                </div>
+          <mat-tab-group>
+            <mat-tab label="Current">
+              <div *ngIf="!isLoading">
+                <app-field-card *ngFor="let field of fields" [field]="field"></app-field-card>
+              </div>
+              <div class="wrapper col-12 py-5" *ngIf="isLoading">
+                <mat-progress-spinner
+                  mode="indeterminate"
+                  class="mx-auto mt-5 pt-5 align-content-center ">
+                </mat-progress-spinner>
               </div>
             </mat-tab>
             <mat-tab label="Past"> Past</mat-tab>

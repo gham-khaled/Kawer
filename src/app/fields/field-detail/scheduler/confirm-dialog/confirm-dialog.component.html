@@ -1,6 +1,11 @@
 <button class="close" mat-button (click)="onNoClick()">x</button>
+<mat-progress-spinner
+  *ngIf="isLoading"
+  mode="indeterminate"
+  class="mx-auto mt-5 pt-5 ">
+</mat-progress-spinner>
 
-<div mat-dialog-content>
+<div *ngIf="!isLoading" mat-dialog-content>
   <div class="container">
     <div class="row">
       <div class="col-10 offset-1 pt-4">
@@ -31,7 +36,7 @@
         ${{data.price - 10}}
       </div>
       <div class="col-12 mt-5">
-        <button [mat-dialog-close]="true" class="btn border-0"> Book</button>
+        <button (click)="onBook()"  class="btn border-0"> Book</button>
       </div>
     </div>
   </div>

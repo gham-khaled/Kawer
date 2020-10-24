@@ -7,8 +7,6 @@ import {
 } from 'date-fns';
 import {
   DAYS_IN_WEEK,
-  SchedulerViewDay,
-  SchedulerViewHour,
   SchedulerViewHourSegment,
   startOfPeriod,
   endOfPeriod,
@@ -23,6 +21,8 @@ import {
 } from 'angular-calendar';
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmDialogComponent} from "./confirm-dialog/confirm-dialog.component";
+import {UserService} from "../../../user/user.service";
+import {LoginDialogComponent} from "../../../user/login-dialog/login-dialog.component";
 
 @Component({
   selector: 'app-scheduler',
@@ -31,7 +31,7 @@ import {ConfirmDialogComponent} from "./confirm-dialog/confirm-dialog.component"
     provide: CalendarDateFormatter,
     useClass: SchedulerDateFormatter
   }],
-  styleUrls: ['./scheduler.component.css']
+  styleUrls: ['./scheduler.component.scss']
 })
 export class SchedulerComponent implements OnInit {
   title: string = 'Angular Calendar Scheduler Demo';
@@ -55,29 +55,32 @@ export class SchedulerComponent implements OnInit {
   prevBtnDisabled: boolean = false;
   nextBtnDisabled: boolean = false;
   events = "Hours here"
-  @Input() fee: number ;
+  @Input() fee: number;
+  @Input() name: string;
+  @Input() reservedDates: [string];
+
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.adjustViewDays();
   }
 
-  constructor(@Inject(LOCALE_ID) locale: string, private dateAdapter: DateAdapter, private dialog: MatDialog) {
+  constructor(@Inject(LOCALE_ID) locale: string,
+              private dateAdapter: DateAdapter,
+              private dialog: MatDialog,
+              private userService: UserService) {
     this.locale = locale;
-    this.segmentModifier = ((segment: SchedulerViewHourSegment): void => {
-      segment.isDisabled = !this.isDateValid(segment.date);
-      segment.backgroundColor = !this.isDateValid(segment.date) ? "#cccccc" : ""
-      segment.cssClass = this.isDateValid(segment.date) ? "segment-enabled" : "segment-disabled"
-      if (segment.isDisabled) {
-        console.log(segment.date)
-      }
-      // segment.backgroundColor = this.isDateValid(segment.date) ? "red" : "blue"
-    }).bind(this);
-    this.adjustViewDays();
-    this.dateOrViewChanged();
+
   }
 
   ngOnInit(): void {
     console.log("Initialisation")
+    this.segmentModifier = ((segment: SchedulerViewHourSegment): void => {
+      segment.isDisabled = !this.isDateValid(segment.date);
+      segment.backgroundColor = !this.isDateValid(segment.date) ? "#cccccc" : ""
+      segment.cssClass = this.isDateValid(segment.date) ? "segment-enabled" : "segment-disabled"
+    }).bind(this);
+    this.adjustViewDays();
+    this.dateOrViewChanged();
   }
 
   adjustViewDays(): void {
@@ -121,15 +124,19 @@ export class SchedulerComponent implements OnInit {
   }
 
   private isDateValid(date: Date): boolean {
-    return date.getTime() != new Date(2020, 5, 28, 12).getTime() && date >= this.minDate && date <= this.maxDate;
+    return  !this.reservedDates.includes(date.toISOString()) && date >= this.minDate && date <= this.maxDate
   }
 
   segmentClicked(action: string, segment: SchedulerViewHourSegment): void {
+    console.log("Name of the field ", this.name)
+
     if (!segment.isDisabled) {
-      this.dialog.open(ConfirmDialogComponent, {
+      const dialog = this.userService.getPermission("user") ? ConfirmDialogComponent : LoginDialogComponent
+      this.dialog.open(dialog as any, {
         data: {
           price: this.fee,
-          date: segment.date
+          date: segment.date,
+          name: this.name
         },
         width: '534px',
         height: '450px',
@@ -137,9 +144,7 @@ export class SchedulerComponent implements OnInit {
         autoFocus: false
       })
     }
-    segment.isDisabled = !this.isDateValid(segment.date);
-    segment.backgroundColor = !this.isDateValid(segment.date) ? "#cccccc" : ""
-    segment.cssClass = this.isDateValid(segment.date) ? "segment-enabled" : "segment-disabled"
+
     this.adjustViewDays();
     this.dateOrViewChanged();
 

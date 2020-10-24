@@ -1,13 +1,19 @@
-.navbar {
+.navbar-white {
   border-bottom: 1px solid lightgray;
   background-color: #FFFFFF;
 }
+.navbar-yellow{
+  background-color: #FDD92A;
+}
+.navbar-yellow .nav-link,.navbar-yellow  .dropdown-item {
+  color: #1F1A38;
 
+}
 .navbar-brand {
   max-height: 70px;
 }
 
-.nav-link {
+.nav-link, .dropdown-item {
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -15,6 +21,13 @@
   line-height: 20px;
   text-transform: capitalize;
   color: #828282;
+}
+
+.avatar-thumbnail {
+  max-height: 125px;
+  max-width: 40px;
+  border-radius: 144.222px;
+
 }
 
 button {
@@ -34,14 +47,15 @@ button {
 #signUp div {
   color: white;
 }
+
 .mat-button:focus {
   outline: none;
 }
 
 
 @media screen and (max-width: 768px) {
-mat-icon {
-  margin-right: 5px ;
-}
+  mat-icon {
+    margin-right: 5px;
+  }
 }
 

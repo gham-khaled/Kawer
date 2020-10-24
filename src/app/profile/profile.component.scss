@@ -17,6 +17,10 @@
 .profile-image {
   z-index: 9999;
   position: relative;
+  border-radius: 144.222px;
+  min-height: 20vh;
+  max-height: 25vh;
+  max-width: 25vh;
 }
 
 .profile-name {
@@ -24,12 +28,14 @@
   text-align: center;
 }
 
-.edit-photo {
+button {
   font-style: normal;
   font-weight: 300;
   font-size: 22px;
   /* identical to box height, or 127% */
   text-decoration-line: underline;
+  z-index: 9999;
+
   /* Maybe */
   color: #1F1A38;
   display: block;

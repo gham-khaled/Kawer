@@ -7,23 +7,39 @@
       <div class="d-flex justify-content-center text-center ">
         Rent a staduim
       </div>
-      <div class="wrapper">
-        <div class="row no-gutters">
-          <div class="col-12 col-sm-4 mb-2">
-            <input type="text" class="input light-gray-text" placeholder="Select a location" id="location">
-          </div>
-          <div class="col-12 col-sm-4 mb-2">
-            <input type="text" (click)="picker.open()" matInput [matDatepicker]="picker"
-                   [matDatepickerFilter]="myFilter"
-                   class="input light-gray-text" placeholder="Select a date?" id="date">
-            <mat-datepicker color="#F4CE11" #picker></mat-datepicker>
-          </div>
-          <div class="col-12 col-sm-4 mb-2">
-            <input type="text" class="input light-gray-text" placeholder="Find a staduim?" id="staduim">
-          </div>
 
-        </div>
+      <div class="wrapper">
+        <form [formGroup]="formInput">
+
+          <div class="row no-gutters">
+
+            <div class="col-12 col-sm-4 p-sm-0 my-2">
+              <input type="text" (click)="picker.open()" [matDatepicker]="picker" [matDatepickerFilter]="myFilter"
+                     formControlName="date" class="input light-gray-text" placeholder="Select a date" id="date">
+            </div>
+
+            <div class="col-12 ml-sm-0 col-sm-4 mb-sm-0  my-2 select d-flex align-items-center">
+
+              <mat-select class="light-gray-text" formControlName="hour" placeholder="Select an hour">
+                <mat-option *ngFor="let hour of hours" [value]="hour">
+                  {{hour}}
+                </mat-option>
+              </mat-select>
+              <mat-datepicker color="#F4CE11" #picker></mat-datepicker>
+            </div>
+
+            <div class="col-12 col-sm-4 my-2">
+              <button class="input light-gray-text" (click)="onFind()" id="staduim">
+                Find a staduim
+              </button>
+            </div>
+
+
+          </div>
+        </form>
+
       </div>
+
     </div>
     <!-------------------------------------- Card football Items--------------------------------------->
     <div class="col-12 title  mt-sm-5 popular ">
