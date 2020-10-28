@@ -10,7 +10,9 @@ import {Field} from "../field.model";
 })
 export class FieldDetailComponent implements OnInit {
   field: Field
-  images_list: [string]
+  images_list: string[] = ["assets/images/field-detail/thumbnail1.png",
+                            "assets/images/field-detail/thumbnail3.png",
+                             "assets/images/field-detail/thumbnail2.png"]
   isLoading: boolean = true
 
   constructor(private fieldsService: FieldsService,
@@ -24,7 +26,7 @@ export class FieldDetailComponent implements OnInit {
           console.log(params);
           this.fieldsService.getFieldByName(params['id']).then(field => {
             this.field = field
-            this.images_list = [this.field.main_image]
+            this.images_list = [this.field.main_image].concat(this.images_list)
             this.isLoading = false
           })
         }
