@@ -33,7 +33,7 @@
     "bootstrap": "^4.4.1",
     "date-fns": "^2.14.0",
     "mat-file-upload": "^10.0.0",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "ng-click-outside": "^7.0.0",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
